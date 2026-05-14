@@ -1,144 +1,99 @@
 export const t = {
   nav: {
-    /* CTA → lleva al calendario de reservas */
-    cta:        { es: 'Agenda 30 min gratis',  en: 'Book 30 min free' },
-    langToggle: { es: 'EN',                    en: 'ES'               },
+    about:      { es: 'Sobre mí',  en: 'About'    },
+    projects:   { es: 'Proyectos', en: 'Projects' },
+    blog:       { es: 'Blog',      en: 'Blog'     },
+    contact:    { es: 'Contacto',  en: 'Contact'  },
+    cta:        { es: 'Escríbeme', en: 'Contact'  },
+    langToggle: { es: 'EN',        en: 'ES'       },
   },
 
   hero: {
+    intro: {
+      es: 'Hola, soy Jefferson —',
+      en: "Hi, I'm Jefferson —",
+    },
     h1a: {
-      es: 'Tu negocio es sólido.',
-      en: 'Your business is solid.',
+      es: 'Builder. Developer.',
+      en: 'Builder. Developer.',
     },
     h1b: {
-      es: 'Tu presencia online te está costando clientes.',
-      en: 'Your online presence is costing you clients.',
+      es: 'Founder.',
+      en: 'Founder.',
     },
     sub: {
-      es: 'Ayudo a emprendedores a tener una web que capture clientes, un sistema que gestione reservas automáticamente, y un agente IA que atienda preguntas 24/7 — sin que tengas que estar presente.',
-      en: 'I help entrepreneurs get a website that captures clients, a system that manages bookings automatically, and an AI agent that handles questions 24/7 — without you having to be there.',
+      es: 'Desarrollador full-stack y co-fundador de FitManage.app — software para entrenadores personales que usan más de 10,000 personas en LATAM. Construyo desde el backend hasta la app móvil, pasando por el producto y las ventas.',
+      en: 'Full-stack developer and co-founder of FitManage.app — software for personal trainers used by over 10,000 people across LATAM. I build everything from backend to mobile app, including product and sales.',
     },
-    /* CTA1 → scroll a #contact (Calendly) */
-    cta1: { es: 'Agenda una llamada gratis',  en: 'Book a free call'  },
-    /* CTA2 → scroll a #projects */
-    cta2: { es: 'Ver proyectos reales',       en: 'See real projects' },
-    stat1n: { es: '4+',   en: '4+'   },
-    stat1l: { es: 'años construyendo negocios digitales', en: 'years building digital businesses' },
-    stat2n: { es: '10k+', en: '10k+' },
-    stat2l: { es: 'usuarios activos en productos que construí', en: 'active users on products I built' },
+    cta1: { es: 'Ver lo que construí', en: 'See what I built' },
+    cta2: { es: 'Leer el blog',        en: 'Read the blog'   },
+    stat1n: { es: '10k+', en: '10k+' },
+    stat1l: { es: 'usuarios activos en FitManage', en: 'active users on FitManage' },
+    stat2n: { es: '4+',   en: '4+'   },
+    stat2l: { es: 'años en producción activa', en: 'years in active production' },
     stat3n: { es: '$0',   en: '$0'   },
-    stat3l: { es: 'costo para tu primera llamada conmigo', en: 'cost for your first call with me' },
+    stat3l: { es: 'de inversión externa para llegar aquí', en: 'external investment to get here' },
   },
 
-  services: {
-    badge: { es: 'Servicios', en: 'Services' },
-    title: {
-      es: 'Tres soluciones para conseguir más clientes online',
-      en: 'Three solutions to get more clients online',
+  about: {
+    badge: { es: 'Sobre mí', en: 'About me' },
+    p1: {
+      es: 'Soy costarricense, desarrollador full-stack, y co-fundador de FitManage.app.',
+      en: "I'm Costa Rican, a full-stack developer, and co-founder of FitManage.app.",
     },
-    sub: {
-      es: 'Cada paquete resuelve un problema real. Elige el que más se ajusta a donde estás hoy.',
-      en: 'Each package solves a real problem. Pick the one that fits where you are today.',
+    p2: {
+      es: 'Empecé a construir FitManage hace cuatro años junto a un cofundador no técnico. Ninguno de los dos sabíamos exactamente cómo iba a crecer — pero sí sabíamos que el problema que resolvíamos era real. Hoy, FitManage es el software que usan entrenadores personales en Costa Rica y LATAM para gestionar sus clientes, rutinas y pagos.',
+      en: "I started building FitManage four years ago with a non-technical co-founder. Neither of us knew exactly how it would grow — but we knew the problem we were solving was real. Today, FitManage is the software personal trainers in Costa Rica and LATAM use to manage their clients, workout plans, and payments.",
     },
-    retainer_label: { es: 'mantenimiento mensual', en: 'monthly maintenance' },
-    from_label:     { es: 'Desde',                 en: 'Starting at'       },
-
-    card1: {
-      price:  { es: '$1,200', en: '$1,200' },
-      badge:  { es: '',       en: ''       },
-      title:  {
-        es: 'Landing page que captura clientes',
-        en: 'Landing page that captures clients',
-      },
-      sub: {
-        es: 'Tu primer vendedor digital, trabajando 24/7',
-        en: 'Your first digital salesperson, working 24/7',
-      },
-      desc: {
-        es: 'Tienes un buen servicio pero tu web no lo refleja — o directamente no tienes una. Pierdes clientes que buscan lo que haces y encuentran a tu competencia primero.',
-        en: 'You have a great service but your website does not reflect it — or you simply do not have one. You are losing clients who search for what you do and find your competitors first.',
-      },
-      f1: { es: 'Diseño enfocado en que el visitante contacte o compre',    en: 'Design focused on getting visitors to contact or buy'     },
-      f2: { es: 'Formulario que captura nombre, email y teléfono del lead', en: 'Form that captures name, email and phone from the lead'   },
-      f3: { es: 'Google Analytics + seguimiento de conversiones instalado', en: 'Google Analytics + conversion tracking installed'         },
-      f4: { es: 'En producción en 2-3 semanas',                            en: 'Live in 2-3 weeks'                                       },
-      retainer: { es: '$120/mes', en: '$120/mo' },
+    p3: {
+      es: 'No soy solo el que escribe el código. Tomé decisiones de producto, hablé con clientes, armé el pricing, hice soporte, y también construí la infraestructura técnica de punta a punta.',
+      en: "I'm not just the one who writes the code. I made product decisions, talked to customers, set the pricing, handled support, and built the full technical infrastructure end-to-end.",
     },
-
-    card2: {
-      price: { es: '$2,800', en: '$2,800' },
-      badge: { es: 'Más solicitado', en: 'Most requested' },
-      title: {
-        es: 'Web completa + reservas en línea',
-        en: 'Full website + online bookings',
-      },
-      sub: {
-        es: 'Clientes reservan solos — sin llamadas ni WhatsApp manual',
-        en: 'Clients book themselves — no calls, no manual WhatsApp',
-      },
-      desc: {
-        es: 'Pasas tiempo respondiendo mensajes para agendar citas que podrían reservarse solas. Cada hora atendiendo ese proceso es una hora que no estás haciendo crecer tu negocio.',
-        en: 'You spend time answering messages to schedule appointments that could book themselves. Every hour managing that process is an hour you are not growing your business.',
-      },
-      f1: { es: 'Web profesional de 5-7 páginas con tu imagen de marca',     en: '5-7 page professional website with your brand'           },
-      f2: { es: 'Calendario de reservas integrado — clientes agendan solos',  en: 'Integrated booking calendar — clients schedule themselves' },
-      f3: { es: 'Confirmación automática por email al cliente y a ti',        en: 'Automatic email confirmation to client and to you'        },
-      f4: { es: 'Panel para ver y gestionar todas tus citas',                 en: 'Dashboard to view and manage all your appointments'       },
-      retainer: { es: '$200/mes', en: '$200/mo' },
+    p4: {
+      es: 'También he construido webs y sistemas para otros negocios cuando el proyecto encaja. Pero lo que más me mueve es construir cosas que duran.',
+      en: "I've also built websites and systems for other businesses when the project fits. But what drives me most is building things that last.",
     },
-
-    card3: {
-      price: { es: '$3,500', en: '$3,500' },
-      badge: { es: '',       en: ''       },
-      title: {
-        es: 'Web + agente IA que atiende clientes',
-        en: 'Website + AI agent that handles clients',
-      },
-      sub: {
-        es: 'Responde preguntas y captura leads mientras duermes',
-        en: 'Answers questions and captures leads while you sleep',
-      },
-      desc: {
-        es: 'Clientes visitan tu web a las 11pm y no encuentran respuesta. Se van. Un agente IA entrenado con la información de tu negocio atiende esas conversaciones, responde preguntas y captura los datos del prospecto.',
-        en: 'Clients visit your website at 11pm and find no answer. They leave. An AI agent trained on your business information handles those conversations, answers questions, and captures prospect data.',
-      },
-      f1: { es: 'Web de conversión completa incluida',                            en: 'Full conversion website included'                          },
-      f2: { es: 'Agente IA entrenado con la información de tu negocio',            en: 'AI agent trained on your business information'              },
-      f3: { es: 'Responde preguntas de clientes en tiempo real, 24/7',             en: 'Answers customer questions in real time, 24/7'              },
-      f4: { es: 'Captura nombre, email y consulta del prospecto automáticamente',  en: 'Automatically captures prospect name, email and inquiry'     },
-      retainer: { es: '$300/mes', en: '$300/mo' },
-    },
+    stack_label: { es: 'Stack técnico', en: 'Tech stack' },
   },
 
   projects: {
     badge: { es: 'Proyectos', en: 'Projects' },
     title: {
-      es: 'Construido y en producción',
-      en: 'Built and shipped to production',
+      es: 'Lo que he construido',
+      en: "What I've built",
     },
     sub: {
-      es: 'No mockups. No demos. Productos reales con clientes reales y resultados medibles.',
-      en: 'No mockups. No demos. Real products with real customers and measurable results.',
+      es: 'No mockups. No demos. Productos reales en producción activa.',
+      en: 'No mockups. No demos. Real products in active production.',
     },
     p1: {
-      badge1: { es: 'SaaS',            en: 'SaaS'          },
-      badge2: { es: '10,000+ usuarios', en: '10,000+ users' },
-      name:   { es: 'FitManage.app',   en: 'FitManage.app' },
+      badge1: { es: 'SaaS — Co-fundador',  en: 'SaaS — Co-founder' },
+      badge2: { es: '10,000+ usuarios',    en: '10,000+ users'     },
+      name:   { es: 'FitManage.app',       en: 'FitManage.app'     },
       desc: {
-        es: 'Construido desde cero junto a un cofundador no técnico. FitManage ahora corre miles de gimnasios en LATAM — reservas, CRM de clientes, planes de entrenamiento y facturación. Una plataforma que diseñé, construí y desplegué de punta a punta.',
-        en: 'Built solo alongside a non-technical co-founder. FitManage now runs thousands of gym businesses across LATAM — bookings, client CRM, workout plans, and billing. One platform I architected, built, and deployed end-to-end.',
+        es: 'FitManage es un software para entrenadores personales que simplifica la gestión de rutinas, nutrición, pagos y clientes. Lo co-fundé y lo construí técnicamente desde cero — desde la arquitectura del backend hasta la app móvil que usan los clientes finales.',
+        en: 'FitManage is software for personal trainers that simplifies the management of workout plans, nutrition, payments, and clients. I co-founded it and built it technically from scratch — from the backend architecture to the mobile app used by end clients.',
       },
+      desc2: {
+        es: 'Hoy tiene más de 10,000 usuarios activos en la plataforma, corre en producción en LATAM, y lo seguimos iterando activamente.',
+        en: 'Today it has over 10,000 active users on the platform, runs in production across LATAM, and we keep iterating actively.',
+      },
+      metric1n: { es: '10,000+', en: '10,000+' },
+      metric1l: { es: 'usuarios activos', en: 'active users' },
+      metric2n: { es: '4+', en: '4+' },
+      metric2l: { es: 'años en producción', en: 'years in production' },
+      metric3: { es: 'Rutinas · Nutrición · Pagos · CRM', en: 'Workout plans · Nutrition · Payments · CRM' },
       pills: ['Python', 'FastAPI', 'PostgreSQL', 'MongoDB', 'Flutter', 'Node.js'],
       url:   'https://fitmanage.app/',
-      link:  { es: 'fitmanage.app →', en: 'fitmanage.app →' },
+      link:  { es: 'Ver FitManage →', en: 'See FitManage →' },
     },
     p2: {
-      badge1: { es: 'Landing',   en: 'Landing'  },
-      badge2: { es: 'Hospedaje', en: 'Lodging'  },
-      name:   { es: 'Finca Buena Vista Turrialba', en: 'Finca Buena Vista Turrialba' },
+      badge1: { es: 'Landing',   en: 'Landing' },
+      badge2: { es: 'Hospedaje', en: 'Lodging' },
+      name:   { es: 'Finca Buena Vista', en: 'Finca Buena Vista' },
       desc: {
-        es: 'Los huéspedes ahora reservan directo — sin comisión de Airbnb, sin intermediarios. Una landing de objetivo único que reemplazó un sitio genérico y convirtió el tráfico orgánico en reservas de mayor margen.',
-        en: 'Guests now book directly — no Airbnb cut, no middlemen. A single-goal landing page that replaced a generic site and turned organic traffic into higher-margin direct bookings.',
+        es: 'Landing de objetivo único para un hospedaje en Turrialba. Los huéspedes reservan directo, sin comisión de plataformas externas.',
+        en: 'Single-goal landing page for a lodging in Turrialba. Guests book directly, with no commission from external platforms.',
       },
       pills: ['Next.js', 'Tailwind CSS', 'Diseño de conversión'],
       url:   'https://fincabuenavistaturrialba.com/',
@@ -149,8 +104,8 @@ export const t = {
       badge2: { es: 'Bienestar', en: 'Wellness' },
       name:   { es: 'Serenia CR', en: 'Serenia CR' },
       desc: {
-        es: 'La primera impresión premium que convierte visitas en sesiones reservadas. Diseñada para que los clientes sientan que están en manos expertas antes de cruzar la puerta.',
-        en: 'The premium first impression that turns visits into booked sessions. Designed so clients feel they are in expert hands before they ever walk through the door.',
+        es: 'Web para un centro de bienestar en Costa Rica. Diseño premium que transmite confianza antes de la primera visita.',
+        en: 'Website for a wellness center in Costa Rica. Premium design that conveys trust before the first visit.',
       },
       pills: ['Next.js', 'Tailwind CSS', 'UX/UI'],
       url:   'https://sereniacr.com/',
@@ -158,25 +113,41 @@ export const t = {
     },
   },
 
+  blog: {
+    badge: { es: 'Blog', en: 'Blog' },
+    title: { es: 'Lo que estoy escribiendo', en: "What I'm writing about" },
+    sub: {
+      es: 'Sobre producto, tecnología y lo que significa construir desde cero.',
+      en: 'About product, technology, and what it means to build from scratch.',
+    },
+    soon: { es: 'Próximamente', en: 'Coming soon' },
+  },
+
   contact: {
-    badge: { es: 'Siguiente paso', en: 'Next step' },
+    badge: { es: 'Contacto', en: 'Contact' },
     title: {
-      es: 'Cuéntame sobre tu negocio',
-      en: 'Tell me about your business',
+      es: '¿Tienes algo en mente?',
+      en: 'Got something in mind?',
     },
     sub: {
-      es: 'Agenda una llamada de 30 minutos. Gratis, sin compromiso. Te digo exactamente qué cambiaría en tu presencia online — me contrates o no.',
-      en: 'Schedule a 30-minute call. Free, no strings attached. I will tell you exactly what I would change about your online presence — whether you hire me or not.',
+      es: 'Puedes escribirme directamente o encontrarme en LinkedIn. Respondo cuando puedo.',
+      en: 'You can write to me directly or find me on LinkedIn. I reply when I can.',
     },
-    trust1: { es: '✓ Primera llamada gratis, sin compromiso',  en: '✓ First call is free, no strings attached'  },
-    trust2: { es: '✓ Respondo en menos de 24 horas',          en: '✓ I reply within 24 hours'                 },
-    trust3: { es: '✓ UTC-6 · Compatible con horario de EEUU', en: '✓ UTC-6 · US-compatible timezone'           },
-    email_label: { es: 'O escríbeme directamente:', en: 'Or write to me directly:' },
-    linkedin_label: { es: 'LinkedIn →', en: 'LinkedIn →' },
+    services_title: {
+      es: '¿Tienes un proyecto puntual?',
+      en: 'Have a specific project?',
+    },
+    services_text: {
+      es: 'A veces colaboro con negocios que necesitan construir algo desde cero — una web, un sistema de reservas, o una integración de IA. Si tu proyecto tiene sentido, conversamos.',
+      en: "I occasionally collaborate with businesses that need to build something from scratch — a website, a booking system, or an AI integration. If your project makes sense, let's talk.",
+    },
+    cta:            { es: 'Escríbeme',  en: 'Write to me' },
+    email_label:    { es: 'Email',      en: 'Email'       },
+    linkedin_label: { es: 'LinkedIn →', en: 'LinkedIn →'  },
   },
 
   footer: {
-    left:  { es: 'Jefferson López · 2026',   en: 'Jefferson López · 2026'   },
-    right: { es: 'Hecho en Costa Rica 🇨🇷',  en: 'Made in Costa Rica 🇨🇷'  },
+    left:      { es: 'Hecho en Costa Rica · Jefferson López · 2026', en: 'Made in Costa Rica · Jefferson López · 2026' },
+    fitmanage: { es: 'FitManage.app', en: 'FitManage.app' },
   },
 }

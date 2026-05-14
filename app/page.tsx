@@ -1,10 +1,8 @@
 import Nav from '@/components/Nav'
 import Hero from '@/components/Hero'
-import Logos from '@/components/Logos'
-import Problem from '@/components/Problem'
-import Services from '@/components/Services'
-import Plan from '@/components/Plan'
+import About from '@/components/About'
 import Projects from '@/components/Projects'
+import BlogPreview from '@/components/BlogPreview'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 
@@ -13,11 +11,9 @@ export default function Home() {
     <>
       <Nav />
       <Hero />
-      <Logos />
-      <Problem />
-      <Services />
-      <Plan />
+      <About />
       <Projects />
+      <BlogPreview />
       <Contact />
       <Footer />
     </>

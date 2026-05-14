@@ -9,7 +9,7 @@ export default function Nav() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[#c4b49a] bg-[#f5f0e8]/90 backdrop-blur-sm">
       <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-3.5">
-        {/* Logo — Caveat */}
+        {/* Logo */}
         <span
           className="text-[1.7rem] font-bold text-[#1c1209] leading-none"
           style={{ fontFamily: 'var(--font-caveat), cursive' }}
@@ -18,11 +18,13 @@ export default function Nav() {
         </span>
 
         <nav className="flex items-center gap-3">
-          {/* Links internos — desktop */}
+          {/* Links — desktop */}
           <div className="hidden md:flex items-center gap-5 mr-3">
             {[
-              { href: '#services', label: { es: 'Servicios', en: 'Services'  } },
-              { href: '#projects', label: { es: 'Proyectos', en: 'Projects'  } },
+              { href: '#about',    label: t.nav.about    },
+              { href: '#projects', label: t.nav.projects },
+              { href: '#blog',     label: t.nav.blog     },
+              { href: '#contact',  label: t.nav.contact  },
             ].map(({ href, label }) => (
               <a
                 key={href}
@@ -44,7 +46,7 @@ export default function Nav() {
             {t.nav.langToggle[lang]}
           </button>
 
-          {/* CTA → Calendly */}
+          {/* CTA → contacto */}
           <a
             href="#contact"
             className="rounded-lg bg-[#8b4513] px-4 py-1.5 text-sm font-medium text-[#f5f0e8] transition-all duration-200 hover:bg-[#b5642a]"

@@ -8,7 +8,7 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-[88vh] dot-grid flex items-center">
-      {/* Manchas de papel en las esquinas */}
+      {/* Manchas de papel */}
       <div
         className="pointer-events-none absolute inset-0"
         aria-hidden
@@ -19,15 +19,15 @@ export default function Hero() {
       />
 
       <div className="mx-auto w-full max-w-[1100px] px-6 py-24 relative z-10">
-        {/* Saludo intro */}
+        {/* Intro */}
         <p
           className="mb-4 text-base text-[#7a6045]"
           style={{ fontFamily: 'var(--font-lora), Georgia, serif', fontStyle: 'italic' }}
         >
-          {lang === 'es' ? 'Hola, soy Jefferson —' : "Hi, I'm Jefferson —"}
+          {t.hero.intro[lang]}
         </p>
 
-        {/* H1 en Caveat */}
+        {/* H1 */}
         <h1
           className="max-w-2xl text-[#1c1209] leading-[1.08]"
           style={{ fontFamily: 'var(--font-caveat), cursive', fontSize: 'clamp(2.8rem, 6vw, 5rem)' }}
@@ -38,14 +38,14 @@ export default function Hero() {
           </span>
         </h1>
 
-        {/* H2 solo SEO */}
+        {/* H2 SEO */}
         <h2 className="sr-only">
           {lang === 'es'
-            ? 'Diseño webs, reservas online y agentes IA para emprendedores — Costa Rica, LATAM, EEUU'
-            : 'Web design, online booking systems and AI agents for entrepreneurs — Costa Rica, LATAM, US'}
+            ? 'Founder y desarrollador full-stack — Co-fundador de FitManage.app · Costa Rica · LATAM'
+            : 'Founder and full-stack developer — Co-founder of FitManage.app · Costa Rica · LATAM'}
         </h2>
 
-        {/* Subheading */}
+        {/* Subtítulo */}
         <p
           className="mt-6 max-w-xl text-[1.05rem] leading-relaxed text-[#4a3520]"
           style={{ fontFamily: 'var(--font-lora), Georgia, serif' }}
@@ -55,17 +55,15 @@ export default function Hero() {
 
         {/* CTAs */}
         <div className="mt-8 flex flex-wrap gap-3">
-          {/* CTA principal → sección Calendly */}
           <a
-            href="#contact"
+            href="#projects"
             className="rounded-lg bg-[#8b4513] px-6 py-3 text-sm font-medium text-[#f5f0e8] transition-all duration-200 hover:bg-[#b5642a] hover:-translate-y-0.5"
             style={{ fontFamily: 'var(--font-inter), sans-serif' }}
           >
             {t.hero.cta1[lang]}
           </a>
-          {/* CTA secundario → portafolio */}
           <a
-            href="#projects"
+            href="#blog"
             className="rounded-lg border border-[#c4b49a] bg-[#ede8db] px-6 py-3 text-sm font-medium text-[#4a3520] transition-all duration-200 hover:border-[#9a8070] hover:text-[#1c1209] hover:-translate-y-0.5"
             style={{ fontFamily: 'var(--font-inter), sans-serif' }}
           >
@@ -73,7 +71,7 @@ export default function Hero() {
           </a>
         </div>
 
-        {/* Stats — números en Caveat, labels en Inter */}
+        {/* Stats */}
         <div className="mt-14 flex flex-wrap gap-10 border-t border-[#c4b49a] pt-12">
           {[
             { n: t.hero.stat1n[lang], l: t.hero.stat1l[lang] },
