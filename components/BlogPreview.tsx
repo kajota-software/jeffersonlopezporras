@@ -12,8 +12,8 @@ const posts = [
       en: 'How I started building FitManage (and what nobody tells you about year one)',
     },
     desc: {
-      es: 'Por qué lo hice, qué falló al inicio, qué cambió. Historia humana, no pitch de ventas.',
-      en: 'Why I did it, what failed early, what changed. A human story, not a sales pitch.',
+      es: 'Por qué lo hice, qué falló al inicio, qué cambió.',
+      en: 'Why I did it, what failed early, what changed.',
     },
   },
   {
@@ -23,8 +23,8 @@ const posts = [
       en: 'What I learned from talking to 50 personal trainers before launching',
     },
     desc: {
-      es: 'Insights de cliente, validación, pivots. Útil para founders y para roles de producto.',
-      en: 'Customer insights, validation, pivots. Useful for founders and product roles.',
+      es: 'Útil para entrenadores.',
+      en: 'Useful for trainers.',
     },
   },
   {
@@ -34,8 +34,8 @@ const posts = [
       en: 'Being founder and developer at the same time: what you gain and what you give up',
     },
     desc: {
-      es: 'Personal, reflexivo, honesto. El tipo de post que la gente comparte.',
-      en: 'Personal, reflective, honest. The kind of post people share.',
+      es: 'Personal, reflexivo, honesto.',
+      en: 'Personal, reflective, honest.',
     },
   },
 ]
