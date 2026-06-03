@@ -1,61 +1,88 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
+import type { Transition } from 'framer-motion'
 import { useLanguage } from '@/context/LanguageContext'
+import { useModal } from '@/context/ModalContext'
 import { t } from '@/lib/translations'
+
+const navTr: Transition = { duration: 0.5, ease: 'easeOut' }
 
 export default function Nav() {
   const { lang, toggle } = useLanguage()
+  const { openModal } = useModal()
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-[#c4b49a] bg-[#f5f0e8]/90 backdrop-blur-sm">
-      <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-3.5">
-        {/* Logo */}
-        <span
-          className="text-[1.7rem] font-bold text-[#1c1209] leading-none"
-          style={{ fontFamily: 'var(--font-caveat), cursive' }}
-        >
+    <motion.header
+      initial={{ opacity: 0, y: -8 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={navTr}
+      className="fixed top-0 z-50 w-full transition-all duration-300"
+      style={{
+        background: scrolled ? 'rgba(245,240,232,0.92)' : 'transparent',
+        backdropFilter: scrolled ? 'blur(12px)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(28,18,9,0.09)' : '1px solid transparent',
+      }}
+    >
+      <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-4">
+        <a href="#home" className="text-[1.05rem] font-semibold tracking-tight" style={{ color: '#1c1209' }}>
           Jefferson López
-        </span>
+        </a>
 
         <nav className="flex items-center gap-3">
-          {/* Links — desktop */}
-          <div className="hidden md:flex items-center gap-5 mr-3">
+          <div className="hidden md:flex items-center gap-6 mr-4">
             {[
-              { href: '#about',    label: t.nav.about    },
               { href: '#projects', label: t.nav.projects },
-              { href: '#blog',     label: t.nav.blog     },
+              { href: '#packages', label: t.nav.packages },
               { href: '#contact',  label: t.nav.contact  },
             ].map(({ href, label }) => (
               <a
                 key={href}
                 href={href}
-                className="text-sm text-[#7a6045] transition-colors hover:text-[#1c1209]"
-                style={{ fontFamily: 'var(--font-inter), sans-serif' }}
+                className="text-sm transition-colors duration-200"
+                style={{ color: '#7a6045' }}
+                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#1c1209' }}
+                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#7a6045' }}
               >
                 {label[lang]}
               </a>
             ))}
           </div>
 
-          {/* Toggle idioma */}
           <button
             onClick={toggle}
-            className="cursor-pointer rounded-full border border-[#c4b49a] bg-[#ede8db] px-3 py-1 text-xs font-medium text-[#7a6045] transition-colors duration-200 hover:border-[#9a8070] hover:text-[#1c1209]"
-            style={{ fontFamily: 'var(--font-inter), sans-serif' }}
+            className="cursor-pointer rounded-full text-xs font-medium transition-all duration-200"
+            style={{
+              border: '1px solid rgba(28,18,9,0.14)',
+              background: 'rgba(28,18,9,0.04)',
+              color: '#7a6045',
+              padding: '4px 12px',
+            }}
+            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = '#1c1209' }}
+            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = '#7a6045' }}
           >
             {t.nav.langToggle[lang]}
           </button>
 
-          {/* CTA → contacto */}
-          <a
-            href="#contact"
-            className="rounded-lg bg-[#8b4513] px-4 py-1.5 text-sm font-medium text-[#f5f0e8] transition-all duration-200 hover:bg-[#b5642a]"
-            style={{ fontFamily: 'var(--font-inter), sans-serif' }}
+          <button
+            onClick={() => openModal()}
+            className="rounded-lg text-sm font-semibold text-white cursor-pointer transition-all duration-200"
+            style={{ background: '#8b4513', padding: '6px 16px', border: 'none' }}
+            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = '#b5642a' }}
+            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = '#8b4513' }}
           >
             {t.nav.cta[lang]}
-          </a>
+          </button>
         </nav>
       </div>
-    </header>
+    </motion.header>
   )
 }

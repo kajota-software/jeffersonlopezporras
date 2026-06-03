@@ -1,9 +1,13 @@
 import Nav from '@/components/Nav'
 import Hero from '@/components/Hero'
-import About from '@/components/About'
+import Logos from '@/components/Logos'
+import Problem from '@/components/Problem'
 import Projects from '@/components/Projects'
-import BlogPreview from '@/components/BlogPreview'
-import Contact from '@/components/Contact'
+import Packages from '@/components/Packages'
+import HowItWorks from '@/components/HowItWorks'
+import About from '@/components/About'
+import FAQ from '@/components/FAQ'
+import ContactCTA from '@/components/ContactCTA'
 import Footer from '@/components/Footer'
 
 export default function Home() {
@@ -11,10 +15,14 @@ export default function Home() {
     <>
       <Nav />
       <Hero />
-      <About />
+      <Logos />
+      <Problem />
       <Projects />
-      <BlogPreview />
-      <Contact />
+      <Packages />
+      <HowItWorks />
+      <About />
+      <FAQ />
+      <ContactCTA />
       <Footer />
     </>
   )

@@ -1,26 +1,13 @@
 import type { Metadata } from 'next'
-import { Caveat, Lora, Inter } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import './globals.css'
 import { LanguageProvider } from '@/context/LanguageContext'
-
-const caveat = Caveat({
-  subsets: ['latin'],
-  weight: ['400', '600', '700'],
-  variable: '--font-caveat',
-  display: 'swap',
-})
-
-const lora = Lora({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  style: ['normal', 'italic'],
-  variable: '--font-lora',
-  display: 'swap',
-})
+import { ModalProvider } from '@/context/ModalContext'
+import ContactModal from '@/components/ContactModal'
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
+  weight: ['400', '500', '600', '700', '800'],
   variable: '--font-inter',
   display: 'swap',
 })
@@ -30,22 +17,20 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://jeffersonlopezporr
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: 'Jefferson López — Founder & Developer · FitManage.app · Costa Rica',
+    default: 'Jefferson López — Presencia digital para negocios de servicio en LATAM',
     template: '%s | Jefferson López',
   },
   description:
-    'Co-fundador de FitManage, software para entrenadores personales con +10,000 usuarios en LATAM. Desarrollador full-stack (Python, Flutter, Node.js). Escribo sobre producto, tecnología y lo que significa construir desde cero.',
+    'Construyo webs y sistemas digitales para negocios de servicio en Costa Rica y LATAM. Co-fundador de FitManage.app, software para entrenadores personales con +10,000 usuarios. Entrega en 10 días.',
   keywords: [
-    'Jefferson López developer',
-    'full-stack developer Costa Rica',
-    'SaaS founder LATAM',
-    'FitManage co-founder',
-    'developer Costa Rica',
-    'full-stack developer LATAM',
-    'technical founder',
-    'Python developer Costa Rica',
-    'Flutter developer',
-    'software para entrenadores personales',
+    'diseño web Costa Rica',
+    'desarrollador web LATAM',
+    'landing page negocio Costa Rica',
+    'sistema reservas WhatsApp',
+    'web para negocios Costa Rica',
+    'Jefferson López desarrollador',
+    'FitManage co-fundador',
+    'presencia digital LATAM',
     'Jefferson López Porras',
   ],
   authors: [{ name: 'Jefferson López Porras', url: BASE_URL }],
@@ -55,24 +40,24 @@ export const metadata: Metadata = {
     locale: 'es_CR',
     alternateLocale: 'en_US',
     url: BASE_URL,
-    siteName: 'Jefferson López — Founder & Developer',
-    title: 'Jefferson López — Founder & Developer',
+    siteName: 'Jefferson López',
+    title: 'Jefferson López — Presencia digital para negocios de servicio en LATAM',
     description:
-      'Co-fundador de FitManage.app. Construyo productos digitales desde Costa Rica para LATAM.',
+      'Construyo webs y sistemas que informan, califican y convierten — antes del primer mensaje. Co-fundador de FitManage.app.',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Jefferson López — Founder & Developer · FitManage.app',
+        alt: 'Jefferson López — Desarrollador y fundador · Costa Rica',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Jefferson López — Founder & Developer',
+    title: 'Jefferson López — Presencia digital para negocios de servicio',
     description:
-      'Co-fundador de FitManage.app · Desarrollador full-stack · Costa Rica → LATAM.',
+      'Webs y sistemas que convierten para negocios de servicio en LATAM. Co-fundador de FitManage.app.',
     images: ['/og-image.png'],
   },
   robots: {
@@ -97,27 +82,14 @@ const jsonLd = {
     {
       '@type': 'Person',
       name: 'Jefferson López Porras',
-      jobTitle: 'Co-Founder & Lead Developer',
+      jobTitle: 'Desarrollador web y co-fundador de FitManage.app',
       description:
-        'Co-fundador de FitManage.app — software para entrenadores personales con +10,000 usuarios en LATAM. Desarrollador full-stack especializado en Python, Flutter y Next.js.',
+        'Construyo webs y sistemas digitales para negocios de servicio en Costa Rica y LATAM. Co-fundador de FitManage.app — software para entrenadores personales con +10,000 usuarios.',
       url: BASE_URL,
       email: 'jefferson.lopez.porras21@gmail.com',
       sameAs: [
         'https://www.linkedin.com/in/jeff-lp',
         'https://fitmanage.app',
-      ],
-      knowsAbout: [
-        'Full-stack development',
-        'SaaS product development',
-        'Python',
-        'FastAPI',
-        'Flutter',
-        'Node.js',
-        'Next.js',
-        'PostgreSQL',
-        'MongoDB',
-        'Docker',
-        'Product management',
       ],
       address: {
         '@type': 'PostalAddress',
@@ -136,17 +108,13 @@ const jsonLd = {
         '@type': 'Person',
         name: 'Jefferson López Porras',
       },
-      offers: {
-        '@type': 'Offer',
-        availability: 'https://schema.org/InStock',
-      },
     },
   ],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${caveat.variable} ${lora.variable} ${inter.variable}`}>
+    <html lang="es" className={inter.variable}>
       <head>
         <script
           type="application/ld+json"
@@ -154,7 +122,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          <ModalProvider>
+            {children}
+            <ContactModal />
+          </ModalProvider>
+        </LanguageProvider>
       </body>
     </html>
   )

@@ -1,130 +1,147 @@
 'use client'
 
-import Image from 'next/image'
+import { motion } from 'framer-motion'
+import type { Transition, TargetAndTransition } from 'framer-motion'
 import { useLanguage } from '@/context/LanguageContext'
 import { t } from '@/lib/translations'
-import { SectionLabel } from './SectionLabel'
 
-function thumbUrl(siteUrl: string) {
-  return `https://image.thum.io/get/width/800/crop/500/noanimate/${siteUrl}`
+interface MotionAnim {
+  initial: TargetAndTransition
+  whileInView: TargetAndTransition
+  viewport: { once: boolean; margin: string }
+  transition: Transition
 }
 
-function BrowserChrome({ url }: { url: string }) {
-  const displayHost = url.replace(/^https?:\/\//, '').replace(/\/$/, '')
+const fromLeft: MotionAnim = {
+  initial: { opacity: 0, x: -50 },
+  whileInView: { opacity: 1, x: 0 },
+  viewport: { once: true, margin: '-100px' },
+  transition: { duration: 0.6, ease: 'easeOut' },
+}
+
+const fromRight: MotionAnim = {
+  initial: { opacity: 0, x: 50 },
+  whileInView: { opacity: 1, x: 0 },
+  viewport: { once: true, margin: '-100px' },
+  transition: { duration: 0.6, ease: 'easeOut' },
+}
+
+function Badge({ label, variant = 'default' }: { label: string; variant?: 'default' | 'wip' }) {
   return (
-    <div
-      className="flex items-center gap-2 px-3 py-2 border-b"
-      style={{ background: '#e0d8cc', borderColor: '#c4b49a' }}
+    <span
+      className="inline-flex text-[11px] font-semibold px-3 py-1 rounded-full"
+      style={
+        variant === 'wip'
+          ? {
+              background: 'rgba(28,18,9,0.06)',
+              color: '#7a6045',
+              border: '1px solid rgba(28,18,9,0.12)',
+            }
+          : {
+              background: 'rgba(139,69,19,0.08)',
+              color: '#8b4513',
+              border: '1px solid rgba(139,69,19,0.22)',
+            }
+      }
     >
-      <div className="flex gap-1 shrink-0">
-        <span className="w-2.5 h-2.5 rounded-full bg-[#c4b49a]" />
-        <span className="w-2.5 h-2.5 rounded-full bg-[#c4b49a]" />
-        <span className="w-2.5 h-2.5 rounded-full bg-[#c4b49a]" />
-      </div>
-      <div
-        className="flex-1 text-center text-xs truncate rounded-sm px-2 py-0.5"
-        style={{
-          fontFamily: 'var(--font-inter), sans-serif',
-          color: '#7a6045',
-          background: 'rgba(196, 180, 154, 0.35)',
-        }}
-      >
-        {displayHost}
-      </div>
-    </div>
+      {label}
+    </span>
   )
 }
 
-function SmallProjectCard({
-  name, badges, desc, pills, url, linkText,
-}: {
+interface ProjectRowProps {
+  logoSide: 'left' | 'right'
+  logoSrc: string
+  logoAlt: string
+  badge: string
+  wipBadge?: string
   name: string
-  badges: string[]
   desc: string
-  pills: string[]
+  details: string[]
   url: string
   linkText: string
-}) {
+  inProgress?: boolean
+  invertLogo?: boolean
+  isFirst?: boolean
+}
+
+function ProjectRow({ logoSide, logoSrc, logoAlt, badge, wipBadge, name, desc, details, url, linkText, inProgress, invertLogo, isFirst }: ProjectRowProps) {
+  const logoAnim = logoSide === 'left' ? fromLeft : fromRight
+  const textAnim = logoSide === 'left' ? fromRight : fromLeft
+
+  const logoCol = (
+    <motion.div {...logoAnim} className="relative min-h-[200px] md:min-h-[240px] flex items-center justify-center">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={logoSrc}
+        alt={logoAlt}
+        className="w-full h-full object-contain p-8 max-h-[220px]"
+        style={{ filter: invertLogo ? 'invert(1)' : 'none' }}
+        onError={(e) => {
+          const el = e.currentTarget as HTMLImageElement
+          el.style.display = 'none'
+          const ph = el.parentElement
+          if (ph) {
+            ph.innerHTML = `<div style="width:100%;min-height:180px;display:flex;align-items:center;justify-content:center;background:rgba(28,18,9,0.03);border:1px solid rgba(28,18,9,0.08);border-radius:12px"><span style="font-size:1.3rem;font-weight:700;color:rgba(28,18,9,0.15)">${logoAlt}</span></div>`
+          }
+        }}
+      />
+    </motion.div>
+  )
+
+  const textCol = (
+    <motion.div {...textAnim} className="flex flex-col justify-center gap-4 py-4">
+      <div className="flex items-center gap-2 flex-wrap">
+        <Badge label={badge} />
+        {inProgress && wipBadge && <Badge label={wipBadge} variant="wip" />}
+      </div>
+      <h3 className="text-2xl font-bold leading-tight" style={{ color: '#1c1209' }}>{name}</h3>
+      <p className="text-[15px] leading-[1.75]" style={{ color: '#4a3520' }}>{desc}</p>
+      <ul className="flex flex-col gap-1.5">
+        {details.map((d, i) => (
+          <li key={i} className="flex items-start gap-2 text-[13px]" style={{ color: '#7a6045' }}>
+            <span className="mt-0.5 shrink-0" style={{ color: '#8b4513' }}>→</span>
+            <span>{d}</span>
+          </li>
+        ))}
+      </ul>
+      {!inProgress ? (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-1 text-sm font-medium transition-colors duration-200"
+          style={{ color: '#8b4513' }}
+          onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#1c1209' }}
+          onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#8b4513' }}
+        >
+          {linkText}
+        </a>
+      ) : (
+        <span className="mt-1 text-sm italic" style={{ color: '#7a6045' }}>
+          {linkText}
+        </span>
+      )}
+    </motion.div>
+  )
+
   return (
     <div
-      className="group flex flex-col overflow-hidden rounded-lg transition-all duration-300"
-      style={{ background: '#f5f0e8', border: '1px solid #c4b49a' }}
-      onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.borderColor = '#9a8070' }}
-      onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.borderColor = '#c4b49a' }}
+      className="py-16"
+      style={{ borderTop: isFirst ? 'none' : '1px solid rgba(28,18,9,0.09)' }}
     >
-      <div className="relative overflow-hidden" style={{ background: '#ede8db' }}>
-        <BrowserChrome url={url} />
-        <div className="relative h-44 w-full overflow-hidden">
-          <Image
-            src={thumbUrl(url)}
-            alt={`Preview de ${name}`}
-            fill
-            className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, 500px"
-            unoptimized
-          />
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            style={{ background: 'rgba(28, 18, 9, 0.52)' }}
-          >
-            <span
-              className="px-4 py-2 rounded text-sm font-medium text-[#f5f0e8]"
-              style={{
-                fontFamily: 'var(--font-lora), Georgia, serif',
-                border: '1px solid rgba(245, 240, 232, 0.5)',
-                background: 'rgba(139, 69, 19, 0.75)',
-              }}
-            >
-              {linkText} →
-            </span>
-          </a>
-        </div>
-      </div>
-
-      <div className="flex flex-1 flex-col gap-3 p-5 border-t border-[#c4b49a]">
-        <div className="flex flex-wrap gap-1.5">
-          {badges.map((b) => (
-            <span
-              key={b}
-              className="px-2.5 py-0.5 text-xs italic rounded-sm"
-              style={{
-                fontFamily: 'var(--font-lora), Georgia, serif',
-                color: '#8b4513',
-                background: 'rgba(139, 69, 19, 0.08)',
-                border: '1px solid rgba(139, 69, 19, 0.2)',
-              }}
-            >
-              {b}
-            </span>
-          ))}
-        </div>
-        <h3
-          className="text-2xl font-semibold text-[#1c1209] leading-tight"
-          style={{ fontFamily: 'var(--font-caveat), cursive' }}
-        >
-          {name}
-        </h3>
-        <p className="text-sm leading-relaxed text-[#4a3520]" style={{ fontFamily: 'var(--font-lora), Georgia, serif' }}>
-          {desc}
-        </p>
-        <div className="mt-auto flex flex-wrap gap-2 pt-2">
-          {pills.map((tag) => (
-            <span
-              key={tag}
-              className="px-2 py-0.5 text-xs rounded-sm text-[#7a6045]"
-              style={{
-                fontFamily: 'var(--font-inter), sans-serif',
-                background: 'rgba(139, 69, 19, 0.06)',
-                border: '1px solid rgba(139, 69, 19, 0.15)',
-              }}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+        {logoSide === 'left' ? (
+          <>
+            <div>{logoCol}</div>
+            <div>{textCol}</div>
+          </>
+        ) : (
+          <>
+            <div className="order-2 md:order-1">{textCol}</div>
+            <div className="order-1 md:order-2">{logoCol}</div>
+          </>
+        )}
       </div>
     </div>
   )
@@ -133,159 +150,73 @@ function SmallProjectCard({
 export default function Projects() {
   const { lang } = useLanguage()
   const p = t.projects
-  const fm = p.p1
+  const wipLabel = { es: 'En proceso', en: 'In progress' }
+
+  const projects = [
+    {
+      logoSide: 'left' as const,
+      logoSrc: '/logos/fma.png',
+      logoAlt: 'FitManage',
+      badge: p.fitmanage.badge[lang],
+      name: p.fitmanage.name[lang],
+      desc: p.fitmanage.desc[lang],
+      details: lang === 'es' ? p.fitmanage.details : p.fitmanage.detailsEn,
+      url: p.fitmanage.url,
+      linkText: p.fitmanage.link[lang],
+      inProgress: false,
+    },
+    {
+      logoSide: 'right' as const,
+      logoSrc: '/logos/sloth.png',
+      logoAlt: 'Sloth RentACar',
+      badge: p.sloth.badge[lang],
+      wipBadge: wipLabel[lang],
+      name: p.sloth.name[lang],
+      desc: p.sloth.desc[lang],
+      details: lang === 'es' ? p.sloth.details : p.sloth.detailsEn,
+      url: p.sloth.url,
+      linkText: lang === 'es' ? 'En desarrollo…' : 'In development…',
+      inProgress: true,
+      invertLogo: true,
+    },
+    {
+      logoSide: 'left' as const,
+      logoSrc: '/logos/logofbv.png',
+      logoAlt: 'Finca Buena Vista',
+      badge: p.finca.badge[lang],
+      name: p.finca.name[lang],
+      desc: p.finca.desc[lang],
+      details: lang === 'es' ? p.finca.details : p.finca.detailsEn,
+      url: p.finca.url,
+      linkText: p.finca.link[lang],
+      inProgress: false,
+    },
+    {
+      logoSide: 'right' as const,
+      logoSrc: '/logos/serenia.png',
+      logoAlt: 'Serenia CR',
+      badge: p.serenia.badge[lang],
+      name: p.serenia.name[lang],
+      desc: p.serenia.desc[lang],
+      details: lang === 'es' ? p.serenia.details : p.serenia.detailsEn,
+      url: p.serenia.url,
+      linkText: p.serenia.link[lang],
+      inProgress: false,
+    },
+  ]
 
   return (
-    <section id="projects" className="border-t border-[#c4b49a]" style={{ background: '#ede8db' }}>
-      <div className="mx-auto max-w-[1100px] px-6 py-24">
-        <SectionLabel>{p.badge[lang]}</SectionLabel>
-
-        <h2
-          className="mt-4 text-[2.6rem] font-semibold leading-tight text-[#1c1209] md:text-5xl"
-          style={{ fontFamily: 'var(--font-caveat), cursive' }}
-        >
-          {p.title[lang]}
-        </h2>
-        <p className="mt-2 max-w-lg text-sm text-[#4a3520]" style={{ fontFamily: 'var(--font-lora), Georgia, serif' }}>
-          {p.sub[lang]}
-        </p>
-
-        {/* ── FitManage — protagonista ─────────────────── */}
-        <div
-          className="group mt-12 overflow-hidden rounded-lg"
-          style={{ border: '2px solid #9a8070', background: '#f5f0e8' }}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            {/* Screenshot */}
-            <div className="relative overflow-hidden" style={{ background: '#ede8db', minHeight: '300px' }}>
-              <BrowserChrome url={fm.url} />
-              <div className="relative w-full overflow-hidden" style={{ height: '280px' }}>
-                <Image
-                  src={thumbUrl(fm.url)}
-                  alt="Preview de FitManage.app"
-                  fill
-                  className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 550px"
-                  unoptimized
-                />
-                <a
-                  href={fm.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ background: 'rgba(28, 18, 9, 0.52)' }}
-                >
-                  <span
-                    className="px-5 py-2.5 rounded text-sm font-medium text-[#f5f0e8]"
-                    style={{
-                      fontFamily: 'var(--font-lora), Georgia, serif',
-                      border: '1px solid rgba(245, 240, 232, 0.5)',
-                      background: 'rgba(139, 69, 19, 0.75)',
-                    }}
-                  >
-                    {fm.link[lang]}
-                  </span>
-                </a>
-              </div>
-            </div>
-
-            {/* Info */}
-            <div className="flex flex-col gap-4 p-7 md:p-10 border-t md:border-t-0 md:border-l border-[#c4b49a]">
-              {/* Badges */}
-              <div className="flex flex-wrap gap-1.5">
-                {[fm.badge1[lang], fm.badge2[lang]].map((b) => (
-                  <span
-                    key={b}
-                    className="px-2.5 py-0.5 text-xs italic rounded-sm"
-                    style={{
-                      fontFamily: 'var(--font-lora), Georgia, serif',
-                      color: '#8b4513',
-                      background: 'rgba(139, 69, 19, 0.1)',
-                      border: '1px solid rgba(139, 69, 19, 0.25)',
-                    }}
-                  >
-                    {b}
-                  </span>
-                ))}
-              </div>
-
-              <h3
-                className="text-3xl font-semibold text-[#1c1209] leading-tight"
-                style={{ fontFamily: 'var(--font-caveat), cursive' }}
-              >
-                {fm.name[lang]}
-              </h3>
-
-              <p className="text-sm leading-relaxed text-[#4a3520]" style={{ fontFamily: 'var(--font-lora), Georgia, serif' }}>
-                {fm.desc[lang]}
-              </p>
-              <p className="text-sm leading-relaxed text-[#4a3520]" style={{ fontFamily: 'var(--font-lora), Georgia, serif' }}>
-                {fm.desc2[lang]}
-              </p>
-
-              {/* Métricas */}
-              <div className="flex gap-6 py-4 border-y border-[#c4b49a]">
-                <div className="flex flex-col gap-0.5">
-                  <span className="text-2xl font-bold text-[#8b4513]" style={{ fontFamily: 'var(--font-caveat), cursive' }}>
-                    {fm.metric1n[lang]}
-                  </span>
-                  <span className="text-xs text-[#7a6045]" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
-                    {fm.metric1l[lang]}
-                  </span>
-                </div>
-                <div className="flex flex-col gap-0.5">
-                  <span className="text-2xl font-bold text-[#8b4513]" style={{ fontFamily: 'var(--font-caveat), cursive' }}>
-                    {fm.metric2n[lang]}
-                  </span>
-                  <span className="text-xs text-[#7a6045]" style={{ fontFamily: 'var(--font-inter), sans-serif' }}>
-                    {fm.metric2l[lang]}
-                  </span>
-                </div>
-              </div>
-
-              <p className="text-xs text-[#7a6045] italic" style={{ fontFamily: 'var(--font-lora), Georgia, serif' }}>
-                {fm.metric3[lang]}
-              </p>
-
-              {/* Stack */}
-              <div className="flex flex-wrap gap-2">
-                {fm.pills.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-2 py-0.5 text-xs rounded-sm text-[#7a6045]"
-                    style={{
-                      fontFamily: 'var(--font-inter), sans-serif',
-                      background: 'rgba(139, 69, 19, 0.06)',
-                      border: '1px solid rgba(139, 69, 19, 0.15)',
-                    }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
+    <section id="projects" className="py-16 section-border">
+      <div className="mx-auto max-w-[1100px] px-6">
+        <div className="mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold" style={{ color: '#1c1209' }}>
+            {p.title[lang]}
+          </h2>
+          <p className="mt-3 text-[15px]" style={{ color: '#7a6045' }}>{p.sub[lang]}</p>
         </div>
-
-        {/* ── Otros proyectos ──────────────────────────── */}
-        <div className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2">
-          <SmallProjectCard
-            name={p.p2.name[lang]}
-            badges={[p.p2.badge1[lang], p.p2.badge2[lang]]}
-            desc={p.p2.desc[lang]}
-            pills={p.p2.pills}
-            url={p.p2.url}
-            linkText={p.p2.link[lang]}
-          />
-          <SmallProjectCard
-            name={p.p3.name[lang]}
-            badges={[p.p3.badge1[lang], p.p3.badge2[lang]]}
-            desc={p.p3.desc[lang]}
-            pills={p.p3.pills}
-            url={p.p3.url}
-            linkText={p.p3.link[lang]}
-          />
-        </div>
+        {projects.map((proj, i) => (
+          <ProjectRow key={proj.logoAlt} {...proj} isFirst={i === 0} />
+        ))}
       </div>
     </section>
   )

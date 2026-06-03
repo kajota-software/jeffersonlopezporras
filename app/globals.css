@@ -1,62 +1,32 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── PAPEL VINTAGE ──────────────────────────────── */
-  --color-paper:         #f5f0e8;
-  --color-paper-dark:    #ede8db;
-  --color-paper-darker:  #e0d8cc;
-
-  --color-ink:           #1c1209;
-  --color-ink-mid:       #4a3520;
-  --color-ink-light:     #7a6045;
-  --color-ink-faint:     #a89070;
-
-  --color-sepia:         #8b4513;
-  --color-sepia-light:   #b5642a;
-  --color-sepia-dim:     #6b3510;
-
-  --color-border:        #c4b49a;
-  --color-border-warm:   #9a8070;
-
-  /* Aliases para compatibilidad con componentes existentes */
-  --color-base:          #f5f0e8;
+  /* ── PAPEL RECICLADO ─────────────────────────────── */
+  --color-bg:            #f5f0e8;
   --color-surface:       #ede8db;
-  --color-card:          #ede8db;
-  --color-card-hover:    #e0d8cc;
+  --color-card:          #e8e0cf;
+
   --color-accent:        #8b4513;
   --color-accent-bright: #b5642a;
   --color-accent-dim:    #6b3510;
+
   --color-text-primary:  #1c1209;
   --color-text-secondary:#4a3520;
   --color-text-muted:    #7a6045;
-  --color-border-subtle: #c4b49a;
-  --color-border-hover:  rgba(154, 128, 112, 0.7);
-  --color-badge-bg:      rgba(139, 69, 19, 0.08);
-  --color-badge-text:    #8b4513;
-  --color-green-alive:   #4a7c59;
 
-  /* ── FUENTES (CSS vars inyectadas por next/font) ── */
-  --font-sans:    var(--font-lora), Georgia, 'Times New Roman', serif;
-  --font-display: var(--font-caveat), 'Brush Script MT', cursive;
-  --font-ui:      var(--font-inter), system-ui, sans-serif;
-  --font-mono:    'Courier New', Courier, monospace;
+  --color-border-subtle: rgba(28,18,9,0.09);
+  --color-border-hover:  rgba(28,18,9,0.18);
 
-  /* ── ANIMACIONES ─────────────────────────────────── */
-  --animate-fade-up:   fade-up 0.6s ease forwards;
-  --animate-pulse-dot: pulse-dot 2.5s ease-in-out infinite;
+  /* ── FUENTES ─────────────────────────────────── */
+  --font-sans:    var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-inter), system-ui, sans-serif;
 }
 
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.4; transform: scale(1.4); }
-}
-
-/* ────────────────────────────────────────────────── */
 @layer base {
   *, *::before, *::after { box-sizing: border-box; }
 
@@ -65,75 +35,45 @@
   body {
     background-color: #f5f0e8;
     color: #1c1209;
-    font-family: var(--font-lora), Georgia, serif;
+    font-family: var(--font-inter), system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
-    /* Grano de papel muy sutil */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    -moz-osx-font-smoothing: grayscale;
+    /* Textura de papel muy sutil */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
   }
 
   ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track  { background: #f5f0e8; }
-  ::-webkit-scrollbar-thumb  { background: #c4b49a; border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: #9a8070; }
+  ::-webkit-scrollbar-thumb  { background: rgba(28,18,9,0.18); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(28,18,9,0.32); }
 }
 
-/* ────────────────────────────────────────────────── */
 @layer utilities {
-  /* Fuente script Caveat para títulos principales */
-  .font-display {
-    font-family: var(--font-caveat), cursive;
+  .marquee-track {
+    animation: marquee 30s linear infinite;
+  }
+  .marquee-track:hover {
+    animation-play-state: paused;
   }
 
-  /* Tarjeta papel con borde cálido */
-  .paper-card {
-    background-color: #ede8db;
-    border: 1px solid #c4b49a;
-    transition: background-color 200ms ease, border-color 200ms ease;
-  }
-  .paper-card:hover {
-    background-color: #e0d8cc;
-    border-color: #9a8070;
-  }
-
-  /* Subrayado ondulado tipo tinta */
-  .ink-underline {
-    text-decoration: underline;
-    text-decoration-style: wavy;
-    text-decoration-color: rgba(139, 69, 19, 0.38);
-    text-underline-offset: 5px;
-  }
-
-  /* Badge estilo sello de tinta */
-  .stamp {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 5px 14px;
-    border-radius: 4px;
-    border: 1.5px solid rgba(139, 69, 19, 0.28);
-    background: rgba(139, 69, 19, 0.06);
-    color: #8b4513;
-    font-family: var(--font-lora), Georgia, serif;
-    font-size: 0.7rem;
-    font-style: italic;
-    letter-spacing: 0.05em;
-  }
-
-  /* Gradiente texto sepia */
   .gradient-text {
-    background: linear-gradient(135deg, #b5642a 0%, #8b4513 60%, #6b3510 100%);
+    background: linear-gradient(135deg, #b5642a 0%, #8b4513 55%, #6b3510 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  /* Puntos de papel */
+  /* Puntos de tinta sobre papel */
   .dot-grid {
     background-image: radial-gradient(
       circle,
-      rgba(139, 69, 19, 0.07) 1px,
+      rgba(28,18,9,0.045) 1px,
       transparent 1px
     );
-    background-size: 28px 28px;
+    background-size: 32px 32px;
+  }
+
+  .section-border {
+    border-top: 1px solid rgba(28,18,9,0.09);
   }
 }
