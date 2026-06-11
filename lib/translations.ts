@@ -103,8 +103,8 @@ export const t = {
       badge: { es: 'SaaS · 10,000+ usuarios', en: 'SaaS · 10,000+ users' },
       name: { es: 'FitManage.app', en: 'FitManage.app' },
       desc: {
-        es: 'Software de gestión para entrenadores personales construido desde cero junto a un cofundador no técnico. Hoy lo usan más de 10,000 usuarios en LATAM — rutinas, clientes, pagos y nutrición en una sola plataforma.',
-        en: 'Management software for personal trainers built from scratch alongside a non-technical co-founder. Today over 10,000 users across LATAM use it — workout plans, clients, payments, and nutrition in one platform.',
+        es: 'Software de gestión para entrenadores personales construido desde cero. Hoy lo usan más de 10,000 usuarios en LATAM — rutinas, clientes, pagos y nutrición en una sola plataforma.',
+        en: 'Management software for personal trainers built from scratch. Today over 10,000 users across LATAM use it — workout plans, clients, payments, and nutrition in one platform.',
       },
       details: ['NodeJS · Vue · Flutter', 'En producción desde 2023'],
       detailsEn: ['Python · FastAPI · PostgreSQL · Flutter', 'In production since 2023'],
