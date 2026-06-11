@@ -55,7 +55,7 @@ const COPY = {
   name:     { es: 'Nombre completo',                    en: 'Full name'                        },
   email:    { es: 'Email',                              en: 'Email'                            },
   phone:    { es: 'Teléfono',                           en: 'Phone'                            },
-  phonePh:  { es: '88668899',                           en: '4155550123'                       },
+  phonePh:  { es: '85112743',                           en: '4155550123'                       },
   business: { es: 'Nombre del negocio',                 en: 'Business name'                    },
   plan:     { es: 'Plan de interés',                    en: 'Plan of interest'                 },
   pains:    { es: '¿Cuál es tu situación?',             en: 'What is your situation?'          },

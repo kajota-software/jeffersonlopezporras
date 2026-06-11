@@ -175,7 +175,7 @@ export default function Projects() {
       desc: p.sloth.desc[lang],
       details: lang === 'es' ? p.sloth.details : p.sloth.detailsEn,
       url: p.sloth.url,
-      linkText: lang === 'es' ? 'En desarrollo…' : 'In development…',
+      linkText: p.sloth.link[lang],
       inProgress: true,
       invertLogo: true,
     },
