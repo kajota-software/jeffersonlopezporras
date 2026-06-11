@@ -172,8 +172,8 @@ export const t = {
         en: 'Your digital presence grows on Google and converts the traffic you already have, with more touchpoints.',
       },
       includes: {
-        es: ['Todo de Arranca', 'Blog + SEO avanzado (estructura para posicionarte en Google)', 'Integración de pagos online (Stripe o PayPal)', 'Analytics y seguimiento de conversiones', 'Hasta 10 páginas de detalle', 'Entrega: 3-4 semanas'],
-        en: ['Everything from Arranca', 'Blog + advanced SEO (structure to rank on Google)', 'Online payment integration (Stripe or PayPal)', 'Analytics and conversion tracking', 'Up to 10 detail pages', 'Delivery: 3-4 weeks'],
+        es: ['Todo de Arranca', 'Blog + SEO avanzado (estructura para posicionarte en Google)', 'Analytics y seguimiento de conversiones', 'Hasta 10 páginas de detalle', 'Entrega: 3-4 semanas'],
+        en: ['Everything from Arranca', 'Blog + advanced SEO (structure to rank on Google)', 'Analytics and conversion tracking', 'Up to 10 detail pages', 'Delivery: 3-4 weeks'],
       },
       cta: { es: 'Quiero este →', en: 'I want this →' },
     },
@@ -189,8 +189,8 @@ export const t = {
         en: 'A system built for your specific business — not a template, not a generic SaaS. Your flow, your modules, your operation.',
       },
       includes: {
-        es: ['Módulos base: CRM, agenda, gestión de staff, reportes de ventas', 'Integración con WhatsApp, pagos y email', 'Login por rol (admin, empleado, cliente)', 'Capacitación incluida', 'Entrega: 6-10 semanas según alcance'],
-        en: ['Base modules: CRM, scheduling, staff management, sales reports', 'WhatsApp, payments, and email integration', 'Role-based login (admin, staff, client)', 'Training included', 'Delivery: 6-10 weeks depending on scope'],
+        es: [''],
+        en: [''],
       },
       cta: { es: 'Hablemos →', en: "Let's talk →" },
     },
