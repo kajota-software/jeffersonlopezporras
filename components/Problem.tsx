@@ -1,69 +1,42 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import type { Transition, TargetAndTransition } from 'framer-motion'
 import { useLanguage } from '@/context/LanguageContext'
 import { t } from '@/lib/translations'
-
-interface MotionAnim {
-  initial: TargetAndTransition
-  whileInView: TargetAndTransition
-  viewport: { once: boolean; margin: string }
-  transition: Transition
-}
-
-const slideLeft: MotionAnim = {
-  initial: { opacity: 0, x: -40 },
-  whileInView: { opacity: 1, x: 0 },
-  viewport: { once: true, margin: '-100px' },
-  transition: { duration: 0.6, ease: 'easeOut' },
-}
-
-const staggerItem = (i: number): MotionAnim => ({
-  initial: { opacity: 0, y: 20 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-100px' },
-  transition: { duration: 0.5, ease: 'easeOut', delay: i * 0.1 },
-})
+import Reveal, { stagger } from '@/components/Reveal'
 
 export default function Problem() {
   const { lang } = useLanguage()
   const p = t.problem
-  const blocks = [p.block1, p.block2, p.block3]
 
   return (
-    <section className="py-28 section-border">
+    <section className="py-24 md:py-32 section-border">
       <div className="mx-auto max-w-[1100px] px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-start">
-          <motion.div {...slideLeft}>
-            <h2
-              className="font-bold leading-[1.1]"
-              style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', color: '#1c1209' }}
-            >
-              {p.left[lang].split('\n').map((line, i) => (
-                <span key={i} className="block">{line}</span>
-              ))}
+        <div className="grid grid-cols-1 items-start gap-12 md:grid-cols-2 md:gap-24">
+          <Reveal>
+            <h2 className="font-bold leading-[1.1] tracking-tight text-text-primary" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
+              {p.h2[lang]}
             </h2>
-          </motion.div>
+          </Reveal>
 
-          <div className="flex flex-col">
-            {blocks.map((block, i) => (
-              <motion.div key={i} {...staggerItem(i)}>
-                <div
-                  className="py-7"
-                  style={{ borderTop: i === 0 ? 'none' : '1px solid rgba(28,18,9,0.09)' }}
-                >
-                  <p className="text-[15px] leading-[1.8] mb-1" style={{ color: '#1c1209' }}>
-                    {block.first[lang]}
-                  </p>
-                  <p className="text-[15px] leading-[1.8]" style={{ color: '#7a6045' }}>
-                    {block.rest[lang]}
-                  </p>
-                </div>
-              </motion.div>
+          <ol className="flex flex-col">
+            {p.points.map((point, i) => (
+              <li key={i} style={{ borderTop: i === 0 ? 'none' : '1px solid rgba(28,18,9,0.09)' }}>
+                <Reveal delay={stagger(i)} className="flex gap-5 py-6">
+                  <span className="shrink-0 pt-1 text-[13px] font-semibold tabular-nums" style={{ color: '#8b4513' }}>
+                    0{i + 1}
+                  </span>
+                  <p className="text-[1.05rem] leading-[1.7] text-text-primary">{point[lang]}</p>
+                </Reveal>
+              </li>
             ))}
-          </div>
+          </ol>
         </div>
+
+        <Reveal className="mt-20 max-w-[860px] md:mt-28">
+          <p className="font-semibold leading-[1.25] tracking-tight text-text-primary" style={{ fontSize: 'clamp(1.6rem, 3.4vw, 2.5rem)' }}>
+            {p.closing[lang]}
+          </p>
+        </Reveal>
       </div>
     </section>
   )

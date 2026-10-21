@@ -1,297 +1,393 @@
+export type L = { es: string; en: string }
+
+export interface ProjectItem {
+  logoSrc: string
+  logoAlt: string
+  invertLogo?: boolean
+  name: string
+  category: L
+  pain?: L
+  done: L
+  url: string
+}
+
 export const t = {
   nav: {
     projects:   { es: 'Proyectos', en: 'Projects' },
-    packages:   { es: 'Paquetes',  en: 'Packages' },
-    contact:    { es: 'Contacto',  en: 'Contact'  },
-    cta:        { es: 'Hablemos',  en: "Let's talk" },
-    langToggle: { es: 'EN',        en: 'ES'         },
+    pricing:    { es: 'Precios',   en: 'Pricing'  },
+    faq:        { es: 'Preguntas', en: 'FAQ'      },
+    cta:        { es: 'Diagnóstico gratis', en: 'Free assessment' },
+    ctaShort:   { es: 'Diagnóstico',        en: 'Assessment'      },
+    langToggle: { es: 'EN', en: 'ES' },
+  },
+
+  cta: {
+    start: { es: 'Hacer mi diagnóstico gratis', en: 'Take my free assessment' },
+    trust: { es: '2 minutos · Sin costo · Resultado al instante', en: '2 minutes · Free · Instant results' },
   },
 
   hero: {
     eyebrow: {
-      es: 'Para negocios que quieren más clientes, no más trabajo',
-      en: 'For businesses that want more clients, not more work',
+      es: 'Para hospedajes, tours y rent a car en Costa Rica',
+      en: 'For lodges, tours and car rentals in Costa Rica',
     },
-    h1a: {
-      es: 'Tu negocio atrae personas.',
-      en: 'Your business attracts people.',
-    },
-    h1b: {
-      es: '¿Cuántas se convierten en clientes?',
-      en: 'How many become clients?',
+    h1: {
+      es: 'Reservas directas, sin comisión, en su WhatsApp.',
+      en: 'Direct bookings, commission-free, right on your WhatsApp.',
     },
     sub: {
-      es: 'Los negocios que más crecen tienen un sistema digital que informa, califica y convierte — antes del primer mensaje. Los que no, dependen del voz a voz y del tiempo libre que no tienen.',
-      en: 'The businesses that grow fastest have a digital system that informs, qualifies, and converts — before the first message. Those that don\'t rely on word of mouth and the free time they don\'t have.',
+      es: 'Instalo en 14 días un sistema para que los turistas lo encuentren en Google, entiendan su oferta en su idioma y le reserven a usted, no a la plataforma.',
+      en: 'In 14 days, I set up a system so travelers find you on Google, understand your offer in their own language, and book with you — not with the platform.',
     },
-    cta1: { es: 'Ver cómo funciona →', en: 'See how it works →' },
-    cta2: { es: 'Ver proyectos',        en: 'See projects'       },
-    stat1n: { es: '10,000+', en: '10,000+' },
-    stat1l: { es: 'usuarios activos en FitManage', en: 'active users on FitManage' },
-    stat2n: { es: '3',  en: '3'  },
-    stat2l: { es: 'negocios funcionando', en: 'businesses running' },
-    stat3n: { es: '10 días', en: '10 days' },
-    stat3l: { es: 'entrega Arranca (paquete base)', en: 'delivery for Arranca (base package)' },
+    secondary: { es: 'Ver proyectos', en: 'See projects' },
+    chat: {
+      contact: { es: 'Cliente nuevo', en: 'New guest' },
+      status:  { es: 'en línea',      en: 'online'    },
+      today:   { es: 'Hoy',           en: 'Today'     },
+      input:   { es: 'Mensaje',       en: 'Message'   },
+      msg: {
+        es: 'Hola, quiero reservar del 12 al 15 de diciembre para 2 personas',
+        en: "Hi, I'd like to book December 12–15 for 2 people",
+      },
+      time: '22:04',
+    },
   },
 
   logos: {
-    label: {
-      es: 'Algunos de los negocios con los que he trabajado',
-      en: 'Some of the businesses I have worked with',
-    },
+    label: { es: 'Proyectos en producción', en: 'Live projects' },
   },
 
   problem: {
-    left: {
-      es: 'El problema no es la falta de clientes.\nEs que llegan y no los capturas.',
-      en: 'The problem isn\'t a lack of clients.\nIt\'s that they arrive and you\'re not capturing them.',
+    h2: {
+      es: 'Los turistas lo buscan, pero no logran reservarle directo.',
+      en: "Travelers look for you, but they can't book with you directly.",
     },
-    block1: {
-      first: {
-        es: 'Alguien busca tu servicio en Google.',
-        en: 'Someone searches for your service on Google.',
+    points: [
+      {
+        es: 'El turista lo busca en Google y encuentra una plataforma de reservas, o al vecino que sí aparece.',
+        en: 'Travelers search for you on Google and find a booking platform — or the neighbor who does show up.',
       },
-      rest: {
-        es: 'Encuentra algo desactualizado o sin información clara. Cierra la pestaña.',
-        en: 'Finds something outdated or unclear. Closes the tab.',
+      {
+        es: 'Le escribe por WhatsApp a las 10 p. m. y, cuando usted responde, ya reservó en otro lado.',
+        en: "They message you on WhatsApp at 10 p.m., and by the time you reply, they've already booked somewhere else.",
       },
+      {
+        es: 'Cada reserva por plataforma le deja una comisión menos en la mano.',
+        en: 'Every platform booking leaves you a commission short.',
+      },
+    ],
+    closing: {
+      es: 'Lo peor no es la comisión. Es sentir que su negocio depende de reglas que usted no controla.',
+      en: "The worst part isn't the commission. It's feeling that your business depends on rules you don't control.",
     },
-    block2: {
-      first: {
-        es: 'Un interesado llega a tu Instagram o WhatsApp.',
-        en: 'Someone reaches your Instagram or WhatsApp.',
-      },
-      rest: {
-        es: 'Quiere saber precios. Envía el mensaje. Espera. El interés se enfría.',
-        en: 'Wants to know prices. Sends a message. Waits. The interest fades.',
-      },
+  },
+
+  solution: {
+    h2: {
+      es: 'No necesita otra página web. Necesita un sistema de reservas.',
+      en: "You don't need another website. You need a booking system.",
     },
-    block3: {
-      first: {
-        es: 'Cuando alguien sí se anima a contactarte,',
-        en: 'When someone finally reaches out,',
+    colA: { es: 'Una web común',           en: 'A typical website'     },
+    colB: { es: 'Sistema Reserva Directa', en: 'Direct Booking System' },
+    rows: [
+      {
+        a: { es: 'Muestra fotos y un teléfono', en: 'Shows photos and a phone number' },
+        b: { es: 'Lleva al turista hasta el mensaje de reserva', en: 'Takes the traveler all the way to the booking message' },
       },
-      rest: {
-        es: 'tiene diez preguntas básicas antes de decidir. Tú estás atendiendo a alguien más.',
-        en: 'they have ten basic questions before deciding. You\'re already with someone else.',
+      {
+        a: { es: 'Solo en español', en: 'Spanish only' },
+        b: { es: 'Bilingüe, pensado para el turista extranjero', en: 'Bilingual, built for international travelers' },
       },
-    },
+      {
+        a: { es: 'Nadie la encuentra', en: 'Nobody finds it' },
+        b: { es: 'Ficha de Google lista para aparecer en búsquedas locales', en: 'Google Business Profile ready to show up in local searches' },
+      },
+      {
+        a: { es: 'No sabe si funciona', en: "You don't know if it works" },
+        b: { es: 'Reporte mensual con visitas, clics y reservas', en: 'Monthly report with visits, clicks and bookings' },
+      },
+      {
+        a: { es: 'Se entrega y se olvida', en: 'Delivered and forgotten' },
+        b: { es: 'Mantenimiento y cambios incluidos cada mes', en: 'Maintenance and changes included every month' },
+      },
+    ],
   },
 
   projects: {
-    title: {
-      es: 'Lo que he construido',
-      en: 'What I have shipped',
-    },
+    title: { es: 'Lo que he construido', en: 'What I have built' },
     sub: {
-      es: 'No mockups. Sistemas reales, en producción, con clientes reales.',
-      en: 'No mockups. Real systems, in production, with real clients.',
+      es: 'Negocios reales que tenían el mismo problema que usted.',
+      en: 'Real businesses that had the same problem you do.',
     },
-    sloth: {
-      badge: { es: 'Landing · WhatsApp Funnel', en: 'Landing · WhatsApp Funnel' },
-      name: { es: 'Sloth RentACar', en: 'Sloth RentACar' },
-      desc: {
-        es: 'Un rent-a-car en Costa Rica que respondía decenas de preguntas repetidas por WhatsApp. Hoy, los clientes llegan con el vehículo elegido, las fechas y el precio ya calculado. Solo falta confirmar.',
-        en: 'A car rental in Costa Rica that was answering dozens of repeated questions over WhatsApp. Today, clients arrive with the vehicle chosen, dates set, and price calculated. Just confirm.',
-      },
-      details: ['Sistema de reserva directo a WhatsApp', 'Bilingüe (ES/EN) · Mobile-first · SEO', 'Entregado en 10 días'],
-      detailsEn: ['Direct-to-WhatsApp booking system', 'Bilingual (ES/EN) · Mobile-first · SEO', 'Delivered in 10 days'],
-      url: 'https://slothrentacar.com',
-      link: { es: 'slothrentacar.com →', en: 'slothrentacar.com →' },
+    labels: {
+      pain:  { es: 'El problema', en: 'The problem' },
+      done:  { es: 'Qué se hizo', en: 'What we did' },
+      visit: { es: 'Ver sitio →', en: 'Visit site →' },
     },
-    fitmanage: {
-      badge: { es: 'SaaS · 10,000+ usuarios', en: 'SaaS · 10,000+ users' },
-      name: { es: 'FitManage.app', en: 'FitManage.app' },
-      desc: {
-        es: 'Software de gestión para entrenadores personales construido desde cero. Hoy lo usan más de 10,000 usuarios en LATAM — rutinas, clientes, pagos y nutrición en una sola plataforma.',
-        en: 'Management software for personal trainers built from scratch. Today over 10,000 users across LATAM use it — workout plans, clients, payments, and nutrition in one platform.',
+    items: [
+      {
+        logoSrc: '/logos/sloth.png',
+        logoAlt: 'Sloth RentACar',
+        invertLogo: true,
+        name: 'Sloth RentACar',
+        category: { es: 'Rent a car', en: 'Car rental' },
+        pain: {
+          es: 'Las reservas dependían de mensajes y plataformas.',
+          en: 'Bookings depended on messages and platforms.',
+        },
+        done: {
+          es: 'Se creó un sistema bilingüe con reserva directa a WhatsApp, entregado en 10 días.',
+          en: 'We built a bilingual system with direct booking to WhatsApp, delivered in 10 days.',
+        },
+        url: 'https://slothrentacar.com',
       },
-      details: ['NodeJS · Vue · Flutter', 'En producción desde 2023'],
-      detailsEn: ['Python · FastAPI · PostgreSQL · Flutter', 'In production since 2023'],
-      url: 'https://fitmanage.app',
-      link: { es: 'fitmanage.app →', en: 'fitmanage.app →' },
-    },
-    finca: {
-      badge: { es: 'Landing · Hospedaje', en: 'Landing · Lodging' },
-      name: { es: 'Finca Buena Vista Turrialba', en: 'Finca Buena Vista Turrialba' },
-      desc: {
-        es: 'Un hospedaje en Turrialba. Una landing de objetivo único que convierte el tráfico orgánico en reservas directas, con mayor margen para el negocio.',
-        en: 'A lodging in Turrialba. A single-goal landing that converts organic traffic into direct bookings, with higher margins for the business.',
+      {
+        logoSrc: '/logos/logofbv.png',
+        logoAlt: 'Finca Buena Vista',
+        name: 'Finca Buena Vista Turrialba',
+        category: { es: 'Hospedaje', en: 'Lodging' },
+        pain: {
+          es: 'El huésped tenía que pasar por plataformas para reservar.',
+          en: 'Guests had to go through platforms to book.',
+        },
+        done: {
+          es: 'Se creó una página de un solo objetivo: reservar directo.',
+          en: 'We built a page with a single goal: booking direct.',
+        },
+        url: 'https://fincabuenavistaturrialba.com',
       },
-      details: ['Next.js · Tailwind · Diseño de conversión'],
-      detailsEn: ['Next.js · Tailwind · Conversion design'],
-      url: 'https://fincabuenavistaturrialba.com',
-      link: { es: 'fincabuenavistaturrialba.com →', en: 'fincabuenavistaturrialba.com →' },
-    },
-    serenia: {
-      badge: { es: 'Landing · Bienestar', en: 'Landing · Wellness' },
-      name: { es: 'Serenia CR', en: 'Serenia CR' },
-      desc: {
-        es: 'Centro de bienestar en Costa Rica. La primera impresión que hace que un visitante sienta que está en manos expertas — antes de la primera sesión.',
-        en: 'Wellness center in Costa Rica. The first impression that makes a visitor feel they are in expert hands — before the first session.',
+      {
+        logoSrc: '/logos/serenia.png',
+        logoAlt: 'Serenia CR',
+        name: 'Serenia CR',
+        category: { es: 'Bienestar', en: 'Wellness' },
+        pain: {
+          es: 'Los clientes preguntaban lo mismo antes de agendar.',
+          en: 'Clients kept asking the same questions before booking.',
+        },
+        done: {
+          es: 'Se creó una página que responde antes de que pregunten.',
+          en: 'We built a page that answers before they ask.',
+        },
+        url: 'https://sereniacr.com',
       },
-      details: ['Next.js · Tailwind · UX/UI'],
-      detailsEn: ['Next.js · Tailwind · UX/UI'],
-      url: 'https://sereniacr.com',
-      link: { es: 'sereniacr.com →', en: 'sereniacr.com →' },
-    },
-  },
-
-  packages: {
-    title:    { es: '¿Cuál es tu situación?',      en: 'Which one fits you?' },
-    subtitle: {
-      es: 'Elige por dónde empezar. Si no sabes cuál, la llamada gratuita aclara todo.',
-      en: "Pick where to start. If you're not sure, the free call will make it clear.",
-    },
-    p1: {
-      situation: {
-        es: '"Tengo un negocio pero no tengo presencia digital que me traiga clientes."',
-        en: '"I have a business but no digital presence that brings me clients."',
+      {
+        logoSrc: '/logos/fma.png',
+        logoAlt: 'FitManage',
+        name: 'FitManage',
+        category: { es: 'Software propio', en: 'Own software' },
+        done: {
+          es: 'Plataforma para entrenadores personales con más de 10,000 usuarios en Latinoamérica, en producción desde 2023. Prueba de que construyo sistemas, no solo páginas.',
+          en: 'A platform for personal trainers with more than 10,000 users across Latin America, live since 2023. Proof that I build systems, not just pages.',
+        },
+        url: 'https://fitmanage.app',
       },
-      name:  { es: 'Arranca',   en: 'Arranca'   },
-      price: { es: '$800 USD',  en: '$800 USD'  },
-      resolves: {
-        es: 'Apareces online, los visitantes entienden qué ofreces, y los interesados llegan a tu WhatsApp ya calificados.',
-        en: 'You appear online, visitors understand what you offer, and interested clients reach your WhatsApp already qualified.',
-      },
-      includes: {
-        es: ['Landing bilingüe (ES/EN) · Mobile-first', 'Sistema de reserva/contacto directo a WhatsApp', 'Páginas individuales por producto o servicio (hasta 6)', 'SEO básico · Publicado en tu dominio', 'Entrega: 10 días hábiles'],
-        en: ['Bilingual landing (ES/EN) · Mobile-first', 'Direct booking/contact system to WhatsApp', 'Individual pages per product or service (up to 6)', 'Basic SEO · Published on your domain', 'Delivery: 10 business days'],
-      },
-      cta: { es: 'Quiero empezar →', en: 'I want to start →' },
-    },
-    p2: {
-      situation: {
-        es: '"Tengo algo online pero quiero más alcance y mejor conversión."',
-        en: '"I have something online but want more reach and better conversion."',
-      },
-      name:  { es: 'Crece',       en: 'Crece'       },
-      price: { es: '$2,500 USD',  en: '$2,500 USD'  },
-      resolves: {
-        es: 'Tu presencia digital crece en Google y convierte mejor el tráfico que ya tienes, con más puntos de contacto.',
-        en: 'Your digital presence grows on Google and converts the traffic you already have, with more touchpoints.',
-      },
-      includes: {
-        es: ['Todo de Arranca', 'Blog + SEO avanzado (estructura para posicionarte en Google)', 'Analytics y seguimiento de conversiones', 'Hasta 10 páginas de detalle', 'Entrega: 3-4 semanas'],
-        en: ['Everything from Arranca', 'Blog + advanced SEO (structure to rank on Google)', 'Analytics and conversion tracking', 'Up to 10 detail pages', 'Delivery: 3-4 weeks'],
-      },
-      cta: { es: 'Quiero este →', en: 'I want this →' },
-    },
-    p3: {
-      situation: {
-        es: '"Mi negocio creció y necesito organizarlo con una herramienta propia."',
-        en: '"My business grew and I need to organize it with a custom tool."',
-      },
-      name:  { es: 'Sistema',        en: 'Sistema'        },
-      price: { es: 'desde $5,000 USD', en: 'from $5,000 USD' },
-      resolves: {
-        es: 'Un sistema hecho para tu negocio específico — no un template, no un SaaS genérico. Tu flujo, tus módulos, tu operación.',
-        en: 'A system built for your specific business — not a template, not a generic SaaS. Your flow, your modules, your operation.',
-      },
-      includes: {
-        es: [''],
-        en: [''],
-      },
-      cta: { es: 'Hablemos →', en: "Let's talk →" },
-    },
+    ] satisfies ProjectItem[] as ProjectItem[],
   },
 
   howItWorks: {
+    title: { es: 'Cómo funciona', en: 'How it works' },
     steps: [
       {
         num: '01',
-        title: { es: 'Cuéntame qué no está funcionando', en: 'Tell me what is not working' },
+        title: { es: 'Haga el diagnóstico gratis', en: 'Take the free assessment' },
         desc: {
-          es: 'Llamada de 30 minutos, sin costo. Me cuentas tu negocio, lo que has intentado, lo que quieres cambiar.',
-          en: 'Free 30-minute call. You explain your business, what you have tried, what you want to change.',
+          es: '2 minutos y sabe cuántas reservas está dejando pasar y qué plan le corresponde.',
+          en: "In 2 minutes you'll know how many bookings you're missing and which plan fits you.",
         },
       },
       {
         num: '02',
-        title: { es: 'Yo diseño, construyo y publico todo', en: 'I design, build, and publish everything' },
+        title: { es: 'En 14 días publico su sistema', en: 'Your system goes live in 14 days' },
         desc: {
-          es: 'Tú apruebas la maqueta. Yo construyo. Salimos en vivo. Sin dolores de cabeza técnicos de tu lado.',
-          en: 'You approve the mockup. I build. We go live. No technical headaches on your end.',
+          es: 'Usted me da una llamada de 45 minutos y sus fotos; yo hago todo lo demás y usted aprueba antes de publicar.',
+          en: 'You give me a 45-minute call and your photos. I handle everything else, and you approve it before it goes live.',
         },
       },
       {
         num: '03',
-        title: { es: 'Tu sistema trabaja mientras tú trabajas', en: 'Your system works while you work' },
+        title: { es: 'Recibe reservas en su WhatsApp', en: 'Bookings arrive on your WhatsApp' },
         desc: {
-          es: 'Más clientes calificados, menos tiempo en preguntas repetidas, presencia digital que no tienes que estar administrando.',
-          en: 'More qualified clients, less time on repeated questions, a digital presence you do not have to manage manually.',
+          es: 'Cada mes le envío un reporte con lo que le trajo el sistema.',
+          en: 'Every month I send you a report showing what the system brought in.',
         },
       },
     ],
   },
 
+  offer: {
+    h2: {
+      es: 'Todo lo que incluye el Sistema Reserva Directa',
+      en: 'Everything included in the Direct Booking System',
+    },
+    items: [
+      {
+        label: {
+          es: 'Sitio de reservas bilingüe (página principal + una por habitación o tour)',
+          en: 'Bilingual booking site (home page + one page per room or tour)',
+        },
+        value: '$1,200',
+      },
+      {
+        label: { es: 'Ficha de Google lista para vender', en: 'Google Business Profile set up to sell' },
+        value: '$250',
+      },
+      {
+        label: { es: 'Medición y reporte del primer mes', en: 'Tracking and first-month report' },
+        value: '$150',
+      },
+      {
+        label: { es: '30 días de ajustes ilimitados', en: '30 days of unlimited adjustments' },
+        value: '$200',
+      },
+    ],
+    totalLabel:  { es: 'Valor total',  en: 'Total value'     },
+    total: '$1,800',
+    investLabel: { es: 'Su inversión', en: 'Your investment' },
+    invest: { es: '$990 + $59/mes', en: '$990 + $59/month' },
+    guaranteeLabel: { es: 'Garantía de entrega', en: 'On-time delivery guarantee' },
+    guaranteeText: {
+      es: 'Si su sistema no está publicado en 14 días hábiles desde que recibo sus fotos y textos, el primer mes de mensualidad va por mi cuenta. El dominio y el contenido son suyos: si un día se va, se lleva todo.',
+      en: "If your system isn't live within 14 business days of receiving your photos and copy, your first month is on me. The domain and content are yours: if you ever leave, you take everything with you.",
+    },
+  },
+
+  packages: {
+    title: { es: '¿Cuál es su situación?', en: 'Which one fits you?' },
+    subtitle: {
+      es: 'Si no sabe cuál elegir, el diagnóstico gratis se lo dice en 2 minutos.',
+      en: "If you're not sure which to choose, the free assessment will tell you in 2 minutes.",
+    },
+    recommended: { es: 'Recomendado', en: 'Recommended' },
+    cta: { es: 'Ver si es para mí', en: 'See if it fits me' },
+    items: [
+      {
+        name: { es: 'Esencial', en: 'Essential' },
+        price: { es: '$590 + $39/mes', en: '$590 + $39/month' },
+        forWho: {
+          es: 'Para quien empieza de cero y necesita aparecer.',
+          en: 'For businesses starting from scratch that need to be found.',
+        },
+        includes: {
+          es: ['Sitio de una página', 'Ficha de Google', 'Botón de WhatsApp'],
+          en: ['One-page website', 'Google Business Profile', 'WhatsApp button'],
+        },
+      },
+      {
+        name: { es: 'Reserva Directa', en: 'Direct Booking' },
+        price: { es: '$990 + $59/mes', en: '$990 + $59/month' },
+        forWho: {
+          es: 'Para quien quiere reservas propias cada mes.',
+          en: 'For businesses that want their own bookings every month.',
+        },
+        includes: {
+          es: ['Todo lo de la oferta', 'Garantía de entrega en 14 días'],
+          en: ['Everything in the offer', '14-day delivery guarantee'],
+        },
+      },
+      {
+        name: { es: 'Reserva Directa + Anuncios', en: 'Direct Booking + Ads' },
+        price: { es: '$990 + $59/mes', en: '$990 + $59/month' },
+        priceNote: {
+          es: '+ $250/mes de gestión (la pauta va aparte)',
+          en: '+ $250/month management (ad spend not included)',
+        },
+        forWho: {
+          es: 'Para quien ya recibe reservas y quiere más volumen.',
+          en: 'For businesses already getting bookings that want more volume.',
+        },
+        includes: {
+          es: ['Todo lo anterior', 'Gestión de Meta o Google Ads'],
+          en: ['Everything above', 'Meta or Google Ads management'],
+        },
+      },
+    ],
+    custom: {
+      es: '¿Su negocio no es turístico o necesita una herramienta propia? Sistema a medida, desde $5,000.',
+      en: "Not a tourism business, or need a tool of your own? Custom system, from $5,000.",
+    },
+    note: {
+      es: 'La mensualidad incluye hosting, dominio, seguridad, hasta 1 hora de cambios al mes y el reporte mensual.',
+      en: 'The monthly fee includes hosting, domain, security, up to 1 hour of changes per month and the monthly report.',
+    },
+  },
+
   about: {
     p1: {
-      es: 'Soy Jefferson. Co-fundador de FitManage, hoy lo usan más de 10,000 usuarios en LATAM.',
-      en: "I'm Jefferson. FitManage Co-founder — today it is used by over 10,000 users across LATAM.",
+      es: 'Soy Jefferson, programador de Turrialba. Fundé FitManage, un software que hoy usan más de 10,000 entrenadores en Latinoamérica.',
+      en: "I'm Jefferson, a developer from Turrialba. I founded FitManage, software now used by more than 10,000 trainers across Latin America.",
     },
     p2: {
-      es: 'Trabajo con negocios que quieren sistemas que funcionen, no presentaciones bonitas que no convierten.',
-      en: 'I work with businesses that want systems that work, not pretty presentations that don\'t convert.',
+      es: 'Ahí aprendí que la gente no compra cuando la página es bonita: compra cuando encuentra respuestas antes de tener que preguntar. Hoy aplico eso para que negocios turísticos como el suyo reciban reservas propias.',
+      en: "That's where I learned that people don't buy because a page looks nice — they buy when they find answers before they have to ask. Today I apply that so tourism businesses like yours get bookings of their own.",
     },
   },
 
   faq: {
+    title: { es: 'Preguntas frecuentes', en: 'Frequently asked questions' },
     questions: [
       {
-        q: { es: '¿En cuánto tiempo está listo?', en: 'How long does it take?' },
-        a: { es: 'Arranca: 10 días hábiles. Crece: 3-4 semanas. Sistema: 6-10 semanas según alcance.', en: 'Arranca: 10 business days. Crece: 3-4 weeks. Sistema: 6-10 weeks depending on scope.' },
+        q: { es: 'Ya estoy en plataformas de reservas, ¿para qué necesito esto?', en: "I'm already on booking platforms. Why do I need this?" },
+        a: {
+          es: 'No reemplaza las plataformas. Recupera al huésped que repite y al que lo busca por su nombre, que hoy reserva por la plataforma y le cuesta comisión.',
+          en: "It doesn't replace the platforms. It wins back repeat guests and the people who search for you by name — guests who today book through a platform and cost you a commission.",
+        },
       },
       {
-        q: { es: '¿Qué necesito tener yo para empezar?', en: 'What do I need to get started?' },
-        a: { es: 'Fotos de tu negocio o servicio, texto base (te ayudo si no tienes), y acceso a tu dominio. El resto lo manejo yo.', en: 'Photos of your business or service, base copy (I help if you don\'t have it), and access to your domain. I handle the rest.' },
+        q: { es: 'Ya pagué una web y no sirvió.', en: "I already paid for a website and it didn't work." },
+        a: {
+          es: 'Por eso no le entrego solo una página: le entrego un sistema pensado para que el turista llegue hasta el mensaje de reserva, con un reporte mensual para que vea qué le trae.',
+          en: "That's why I don't just hand you a page: I deliver a system designed to take travelers all the way to the booking message, with a monthly report so you can see what it brings in.",
+        },
       },
       {
-        q: { es: '¿Puedo actualizar el contenido después?', en: 'Can I update the content afterwards?' },
-        a: { es: 'Sí. Los primeros 30 días, cambios de contenido sin costo adicional. Después, se valora el total basado en los cambios.', en: 'Yes. The first 30 days, content changes at no extra cost. After that, the total is then calculated based on the changes .' },
+        q: { es: 'No sé nada de tecnología.', en: "I don't know anything about tech." },
+        a: {
+          es: 'No tiene que tocar nada. Los cambios me los pide por WhatsApp.',
+          en: "You don't have to touch a thing. Just send me any changes on WhatsApp.",
+        },
       },
       {
-        q: { es: '¿Trabajan con negocios fuera de Costa Rica?', en: 'Do you work with businesses outside Costa Rica?' },
-        a: { es: 'Sí. Trabajo 100% remoto. Proyectos en Costa Rica, LATAM y EEUU.', en: 'Yes. I work 100% remotely. Projects in Costa Rica, LATAM, and the US.' },
-      },
-{
-  "q": {
-    "es": "¿Qué pasa si no me gusta cómo quedó?",
-    "en": "What if I don't like how it turned out?"
-  },
-  "a": {
-    "es": "El diseño no se construye para que 'se vea bonito' — se construye para comunicar bien y convertir visitantes en clientes. Cada decisión de estructura, copy y diseño tiene una razón fundamentada en experiencia de usuario y en el mensaje correcto para tu negocio. Antes de escribir una línea de código, trabajamos juntos en una maqueta que defines y apruebas. Cambios basados en gustos personales después de esa aprobación no aplican — pero cualquier ajuste respaldado en datos, en el mensaje o en la experiencia del usuario siempre tiene espacio. Los detalles están en el contrato.",
-    "en": "The design isn't built to 'look nice' — it's built to communicate clearly and convert visitors into clients. Every structural, copy, and design decision has a reason grounded in user experience and the right message for your business. Before writing a single line of code, we work together on a mockup that you define and approve. Changes based on personal taste after that approval don't apply — but any adjustment backed by data, messaging, or user experience always has room. Details are in the contract."
-  }
-},
-      {
-        q: { es: '¿El sistema de WhatsApp funciona con cualquier número?', en: 'Does the WhatsApp system work with any number?' },
-        a: { es: 'Sí. WhatsApp Business y WhatsApp personal. Solo necesito el número con código de país.', en: 'Yes. WhatsApp Business and personal WhatsApp. I just need the number with the country code.' },
+        q: { es: '¿Y si no recibo reservas?', en: "What if I don't get any bookings?" },
+        a: {
+          es: 'Cada mes le envío un reporte con visitas, clics y reservas, y con esa información ajustamos lo que no esté funcionando. La mensualidad incluye hasta 1 hora de cambios al mes.',
+          en: "Every month I send you a report with visits, clicks and bookings, and we use it to adjust whatever isn't working. The monthly fee includes up to 1 hour of changes per month.",
+        },
       },
       {
-        q: { es: '¿Hacen mantenimiento después de lanzar?', en: 'Do you do maintenance after launch?' },
-        a: { es: 'El primer mes está incluido. Después coordinamos según necesidad.', en: 'The first month is included. After that we coordinate based on need.' },
+        q: { es: '¿El dominio es mío?', en: 'Is the domain mine?' },
+        a: { es: 'Sí, siempre.', en: 'Yes, always.' },
       },
       {
-        q: { es: '¿Puedo empezar con Arranca y subir a Crece después?', en: 'Can I start with Arranca and upgrade to Crece later?' },
-        a: { es: 'Sí. Arranca está construido para poder escalar. No hay que rehacer todo.', en: 'Yes. Arranca is built to scale. No need to rebuild everything.' },
+        q: { es: '¿Cuánto tarda?', en: 'How long does it take?' },
+        a: {
+          es: '14 días hábiles desde que recibo fotos y textos.',
+          en: '14 business days from when I receive your photos and copy.',
+        },
+      },
+      {
+        q: { es: '¿Funciona con mi número de WhatsApp?', en: 'Does it work with my WhatsApp number?' },
+        a: { es: 'Sí, con su número actual.', en: 'Yes, with your current number.' },
+      },
+      {
+        q: { es: '¿Trabaja fuera de Turrialba?', en: 'Do you work outside Turrialba?' },
+        a: { es: 'Sí, en todo Costa Rica.', en: 'Yes, anywhere in Costa Rica.' },
       },
     ],
   },
 
+  diagnosticSection: {
+    h2: { es: 'Diagnóstico gratis', en: 'Free assessment' },
+    sub: {
+      es: 'Responda 8 preguntas y sepa cuántas reservas se le están escapando y qué plan le corresponde.',
+      en: "Answer 8 questions and find out how many bookings are slipping away and which plan fits you.",
+    },
+  },
+
   contactCta: {
     h2: {
-      es: '¿Tu negocio merece más visibilidad online?',
-      en: 'Does your business deserve more online visibility?',
-    },
-    sub: {
-      es: 'Cuéntame en 30 minutos.\nTe digo exactamente qué necesitas — sin compromiso.',
-      en: 'Tell me in 30 minutes.\nI will tell you exactly what you need — no strings attached.',
-    },
-    btn: { es: 'Agendar llamada gratuita →', en: 'Book a free call →' },
-    trust: {
-      es: '✓ Sin costo · ✓ Sin compromiso · ✓ Respondo en menos de 24h',
-      en: '✓ Free · ✓ No commitment · ✓ Reply within 24h',
+      es: 'Cada temporada sin un canal propio es margen que se queda en la plataforma.',
+      en: 'Every season without your own booking channel is margin left on the platform.',
     },
   },
 
@@ -299,5 +395,241 @@ export const t = {
     left:      { es: 'Jefferson López · 2026', en: 'Jefferson López · 2026' },
     fitmanage: { es: 'FitManage.app', en: 'FitManage.app' },
     cr:        { es: 'Hecho en Costa Rica 🇨🇷', en: 'Made in Costa Rica 🇨🇷' },
+  },
+}
+
+// ── Diagnóstico interactivo ─────────────────────────────────────────
+
+export const diag = {
+  questions: [
+    {
+      q: { es: '¿Qué tipo de negocio tiene?', en: 'What kind of business do you run?' },
+      options: [
+        { es: 'Hospedaje (cabinas, hotel, finca, glamping)', en: 'Lodging (cabins, hotel, farm stay, glamping)' },
+        { es: 'Tours o actividades', en: 'Tours or activities' },
+        { es: 'Rent a car', en: 'Car rental' },
+        { es: 'Otro tipo de negocio', en: 'Another type of business' },
+      ],
+    },
+    {
+      q: { es: '¿Por dónde le llega la mayoría de sus reservas?', en: 'Where do most of your bookings come from?' },
+      options: [
+        { es: 'Booking, Airbnb o Expedia', en: 'Booking, Airbnb or Expedia' },
+        { es: 'WhatsApp o Instagram', en: 'WhatsApp or Instagram' },
+        { es: 'Gente que llega o referidos', en: 'Walk-ins or referrals' },
+        { es: 'Casi no me llegan reservas', en: 'I barely get any bookings' },
+      ],
+    },
+    {
+      q: { es: '¿Tiene página web hoy?', en: 'Do you have a website today?' },
+      options: [
+        { es: 'No', en: 'No' },
+        { es: 'Sí, pero casi no me trae reservas', en: 'Yes, but it barely brings in bookings' },
+        { es: 'Sí, y me trae algunas reservas', en: 'Yes, and it brings in some bookings' },
+      ],
+    },
+    {
+      q: {
+        es: 'Si alguien busca su tipo de negocio en su zona en Google, ¿aparece?',
+        en: 'If someone searches Google for your type of business in your area, do you show up?',
+      },
+      options: [
+        { es: 'Sí, de los primeros', en: 'Yes, near the top' },
+        { es: 'Aparezco, pero abajo', en: 'I show up, but further down' },
+        { es: 'No sé', en: "I'm not sure" },
+        { es: 'No aparezco', en: "I don't show up" },
+      ],
+    },
+    {
+      q: {
+        es: '¿Cuánto tarda normalmente en responder un WhatsApp de un cliente?',
+        en: 'How long does it usually take you to reply to a customer on WhatsApp?',
+      },
+      options: [
+        { es: 'Menos de 15 minutos', en: 'Under 15 minutes' },
+        { es: 'Entre 1 y 3 horas', en: '1 to 3 hours' },
+        { es: 'El mismo día', en: 'Same day' },
+        { es: 'Al día siguiente o más', en: 'Next day or later' },
+      ],
+    },
+    {
+      q: { es: '¿Cuánto cuesta en promedio una reserva en su negocio?', en: "What's the average value of a booking at your business?" },
+      options: [
+        { es: 'Menos de $100', en: 'Under $100' },
+        { es: '$100–300', en: '$100–300' },
+        { es: '$300–600', en: '$300–600' },
+        { es: 'Más de $600', en: 'Over $600' },
+      ],
+    },
+    {
+      q: { es: 'En temporada alta, ¿cuántas reservas recibe al mes?', en: 'In high season, how many bookings do you get per month?' },
+      options: [
+        { es: 'Menos de 10', en: 'Fewer than 10' },
+        { es: '10–30', en: '10–30' },
+        { es: '30–60', en: '30–60' },
+        { es: 'Más de 60', en: 'More than 60' },
+      ],
+    },
+    {
+      q: { es: '¿Qué quiere lograr en los próximos 3 meses?', en: 'What do you want to achieve in the next 3 months?' },
+      options: [
+        { es: 'Aparecer en Google y empezar a recibir reservas directas', en: 'Show up on Google and start getting direct bookings' },
+        { es: 'Recibir reservas directas cada mes y depender menos de las plataformas', en: 'Get direct bookings every month and rely less on platforms' },
+        { es: 'Ya recibo reservas directas, quiero más volumen con anuncios', en: 'I already get direct bookings — I want more volume with ads' },
+      ],
+    },
+  ],
+
+  // Nombre corto del tipo de negocio para el titular del resultado
+  typeShort: [
+    { es: 'Hospedaje', en: 'Lodging' },
+    { es: 'Tours o actividades', en: 'Tours and activities' },
+    { es: 'Rent a car', en: 'Car rental' },
+    { es: 'Otro tipo de negocio', en: 'Other business' },
+  ],
+
+  ui: {
+    progress: { es: 'Pregunta {n} de {total}', en: 'Question {n} of {total}' },
+    back:     { es: 'Atrás',  en: 'Back'  },
+    close:    { es: 'Cerrar', en: 'Close' },
+    resultStep:  { es: 'Su resultado', en: 'Your result' },
+    contactStep: { es: 'Último paso',  en: 'Last step'   },
+  },
+
+  analyzing: [
+    { es: 'Revisando cómo le llegan sus reservas…', en: 'Reviewing how your bookings come in…' },
+    { es: 'Calculando las reservas que se le escapan…', en: "Calculating the bookings you're missing…" },
+    { es: 'Eligiendo el plan para su negocio…', en: 'Choosing the right plan for your business…' },
+  ],
+
+  result: {
+    eyebrow: { es: 'Su diagnóstico', en: 'Your assessment' },
+    titleMany: {
+      es: '{type}: se le podrían estar escapando unas {n} reservas al mes.',
+      en: '{type}: you could be missing around {n} bookings a month.',
+    },
+    titleOne: {
+      es: '{type}: se le podría estar escapando al menos una reserva al mes.',
+      en: '{type}: you could be missing at least one booking a month.',
+    },
+    yearly:   { es: 'al año', en: 'a year' },
+    estimate: { es: 'Estimación basada en sus respuestas.', en: 'Estimate based on your answers.' },
+    platformNote: {
+      es: 'Además, por cada reserva de plataforma paga una comisión que podría quedarse usted.',
+      en: 'On top of that, every platform booking pays a commission you could keep.',
+    },
+    findingsLabel: { es: 'Lo que encontramos', en: 'What we found' },
+    transformation: {
+      es: 'Con el Sistema Reserva Directa, los turistas lo encuentran, entienden su oferta en su idioma y le reservan directo en su WhatsApp.',
+      en: 'With the Direct Booking System, travelers find you, understand your offer in their own language, and book directly on your WhatsApp.',
+    },
+    planLabel:   { es: 'Su plan recomendado', en: 'Your recommended plan' },
+    investLabel: { es: 'Inversión',           en: 'Investment'            },
+    guarantee: {
+      es: 'Incluye la garantía de entrega: si su sistema no está publicado en 14 días hábiles desde que recibo sus fotos y textos, el primer mes de mensualidad va por mi cuenta.',
+      en: "Includes the on-time delivery guarantee: if your system isn't live within 14 business days of receiving your photos and copy, your first month is on me.",
+    },
+    cta:     { es: 'Agendar mi primera reunión', en: 'Book my first meeting' },
+    restart: { es: 'Empezar de nuevo',           en: 'Start over'            },
+  },
+
+  findings: {
+    noWeb:         { es: 'Los turistas que lo buscan no tienen dónde reservarle directo.', en: 'Travelers looking for you have nowhere to book with you directly.' },
+    weakWeb:       { es: 'Su web no está llevando al turista hasta la reserva.', en: "Your website isn't taking travelers all the way to a booking." },
+    googleNo:      { es: 'Cuando lo buscan en Google, la reserva se la lleva otro.', en: 'When people search for you on Google, someone else gets the booking.' },
+    googleLow:     { es: 'Aparece en Google, pero debajo de quienes se llevan la reserva.', en: 'You show up on Google, but below the ones getting the bookings.' },
+    googleUnknown: { es: 'Si no sabe si aparece en Google, lo más probable es que esas búsquedas se las lleve otro.', en: "If you don't know whether you show up on Google, chances are someone else is getting those searches." },
+    slow:          { es: 'Cada hora sin responder es una reserva que se enfría.', en: 'Every hour without a reply is a booking going cold.' },
+    platforms:     { es: 'La mayoría de sus reservas pagan comisión.', en: 'Most of your bookings pay a commission.' },
+    fewBookings:   { es: 'Hoy casi no le llegan reservas: su negocio no está en el camino del turista.', en: "You barely get bookings today: your business isn't on the traveler's path." },
+    solid:         { es: 'Su base es buena: el siguiente paso es convertirla en reservas directas cada mes.', en: 'You have a solid base: the next step is turning it into direct bookings every month.' },
+  },
+
+  plans: {
+    esencial: {
+      name: { es: 'Esencial', en: 'Essential' },
+      summary: { es: 'Sitio de una página, ficha de Google y botón de WhatsApp.', en: 'One-page website, Google Business Profile and WhatsApp button.' },
+      price: { es: '$590 + $39/mes', en: '$590 + $39/month' },
+      investPhrase: { es: 'de $590 + $39/mes', en: '$590 + $39/month' },
+      guarantee: false,
+    },
+    reserva: {
+      name: { es: 'Reserva Directa', en: 'Direct Booking' },
+      summary: {
+        es: 'Sitio de reservas bilingüe, ficha de Google, medición y reporte mensual.',
+        en: 'Bilingual booking site, Google Business Profile, tracking and monthly report.',
+      },
+      price: { es: '$990 + $59/mes', en: '$990 + $59/month' },
+      investPhrase: { es: 'de $990 + $59/mes', en: '$990 + $59/month' },
+      guarantee: true,
+    },
+    anuncios: {
+      name: { es: 'Reserva Directa + Anuncios', en: 'Direct Booking + Ads' },
+      summary: {
+        es: 'Todo lo de Reserva Directa + gestión de Meta o Google Ads.',
+        en: 'Everything in Direct Booking + Meta or Google Ads management.',
+      },
+      price: { es: '$990 + $59/mes + $250/mes de gestión (la pauta va aparte)', en: '$990 + $59/month + $250/month management (ad spend not included)' },
+      investPhrase: { es: 'de $990 + $59/mes + $250/mes de gestión', en: '$990 + $59/month + $250/month management' },
+      guarantee: true,
+    },
+    medida: {
+      name: { es: 'Sistema a medida', en: 'Custom system' },
+      summary: {
+        es: 'Una herramienta hecha para la operación de su negocio.',
+        en: "A tool built around how your business operates.",
+      },
+      price: { es: 'Desde $5,000', en: 'From $5,000' },
+      investPhrase: { es: 'desde $5,000', en: 'from $5,000' },
+      guarantee: false,
+    },
+  },
+
+  contact: {
+    intro: {
+      es: 'Va a pasar directo al WhatsApp de nuestro equipo para agendar su primera reunión e iniciar el trabajo. Su plan recomendado es {plan} — inversión {price}.',
+      en: "You'll go straight to our team's WhatsApp to book your first meeting and get started. Your recommended plan is {plan} — investment {price}.",
+    },
+    name:     { es: 'Nombre',             en: 'Name'             },
+    business: { es: 'Nombre del negocio', en: 'Business name'    },
+    phone:    { es: 'Teléfono',           en: 'Phone'            },
+    email:    { es: 'Email (opcional)',   en: 'Email (optional)' },
+    consent:  { es: 'Conozco la inversión del plan recomendado.', en: 'I understand the investment for the recommended plan.' },
+    submit:   { es: 'Continuar a WhatsApp', en: 'Continue to WhatsApp' },
+    errFields:  { es: 'Complete su nombre, el nombre del negocio y su teléfono.', en: 'Please fill in your name, business name and phone.' },
+    errConsent: { es: 'Confirme que conoce la inversión del plan recomendado.', en: 'Please confirm you understand the investment for the recommended plan.' },
+    errEmail:   { es: 'Revise el email o déjelo en blanco.', en: 'Please check your email or leave it blank.' },
+  },
+
+  // Plantilla del mensaje de WhatsApp. {campos} se reemplazan al enviar.
+  message: {
+    es: `Hola Jefferson, hice el diagnóstico en su web.
+Nombre: {name}
+Negocio: {business} ({type})
+Teléfono: {phone}
+Email: {email}
+Reservas llegan por: {a2}
+Web: {a3} · Google: {a4} · Respuesta WhatsApp: {a5}
+Precio promedio: {a6} · Reservas/mes: {a7}
+Meta: {a8}
+Resultado: {result}
+Plan recomendado: {plan} — {price}
+Conozco la inversión y quiero agendar la primera reunión.`,
+    en: `Hi Jefferson, I took the assessment on your website.
+Name: {name}
+Business: {business} ({type})
+Phone: {phone}
+Email: {email}
+Bookings come from: {a2}
+Website: {a3} · Google: {a4} · WhatsApp reply time: {a5}
+Average booking: {a6} · Bookings/month: {a7}
+Goal: {a8}
+Result: {result}
+Recommended plan: {plan} — {price}
+I understand the investment and want to book the first meeting.`,
+  },
+  resultLine: {
+    es: '~{n} reservas/mes que se escapan (~{amount}/año)',
+    en: '~{n} bookings/month slipping away (~{amount}/year)',
   },
 }

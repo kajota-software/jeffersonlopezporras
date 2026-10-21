@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import type { Transition } from 'framer-motion'
 import { useLanguage } from '@/context/LanguageContext'
 import { t } from '@/lib/translations'
+import type { L } from '@/lib/translations'
 
 const answerTr: Transition = { duration: 0.3, ease: 'easeInOut' }
 
@@ -49,19 +50,27 @@ function FAQItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boo
   )
 }
 
-export default function FAQ() {
+interface FAQProps {
+  id?: string
+  title?: L
+  questions?: { q: L; a: L }[]
+}
+
+const DEFAULT_TITLE: L = { es: 'Preguntas frecuentes', en: 'Frequently asked questions' }
+
+export default function FAQ({ id = 'faq', title = DEFAULT_TITLE, questions = t.faq.questions }: FAQProps) {
   const { lang } = useLanguage()
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section id="faq" className="py-28 section-border">
+    <section id={id} className="py-28 section-border">
       <div className="mx-auto max-w-[720px] px-6">
         <h2 className="text-3xl md:text-4xl font-bold mb-12" style={{ color: '#1c1209' }}>
-          {lang === 'es' ? 'Preguntas frecuentes' : 'Frequently asked questions'}
+          {title[lang]}
         </h2>
 
         <div style={{ borderTop: '1px solid rgba(28,18,9,0.09)' }}>
-          {t.faq.questions.map((item, i) => (
+          {questions.map((item, i) => (
             <FAQItem
               key={i}
               q={item.q[lang]}

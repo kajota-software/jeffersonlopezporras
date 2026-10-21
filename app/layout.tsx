@@ -2,8 +2,9 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { LanguageProvider } from '@/context/LanguageContext'
-import { ModalProvider } from '@/context/ModalContext'
-import ContactModal from '@/components/ContactModal'
+import { DiagnosticProvider } from '@/context/DiagnosticContext'
+import Diagnostic from '@/components/diagnostic/Diagnostic'
+import { MotionProvider } from '@/components/Reveal'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -17,17 +18,18 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://jeffersonlopezporr
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: 'Jefferson López — Presencia digital para negocios de servicio en LATAM',
+    default: 'Sistema Reserva Directa | Reservas directas para hospedajes, tours y rent a car en Costa Rica',
     template: '%s | Jefferson López',
   },
   description:
-    'Construyo webs y sistemas digitales para negocios de servicio en Costa Rica y LATAM. Co-fundador de FitManage.app, software para entrenadores personales con +10,000 usuarios. Entrega en 10 días.',
+    'En 14 días instalo un sistema para que los turistas lo encuentren en Google, entiendan su oferta en su idioma y le reserven a usted, sin comisión.',
   keywords: [
-    'diseño web Costa Rica',
-    'desarrollador web LATAM',
-    'landing page negocio Costa Rica',
-    'sistema reservas WhatsApp',
-    'web para negocios Costa Rica',
+    'reservas directas Costa Rica',
+    'sistema de reservas WhatsApp',
+    'web para hospedajes Costa Rica',
+    'web para tours Costa Rica',
+    'web para rent a car Costa Rica',
+    'reservas sin comisión',
     'Jefferson López desarrollador',
     'FitManage co-fundador',
     'presencia digital LATAM',
@@ -41,9 +43,9 @@ export const metadata: Metadata = {
     alternateLocale: 'en_US',
     url: BASE_URL,
     siteName: 'Jefferson López',
-    title: 'Jefferson López — Presencia digital para negocios de servicio en LATAM',
+    title: 'Reservas directas, sin comisión, en su WhatsApp',
     description:
-      'Construyo webs y sistemas que informan, califican y convierten — antes del primer mensaje. Co-fundador de FitManage.app.',
+      'Sistema de reservas directas para hospedajes, tours y rent a car en Costa Rica. Haga el diagnóstico gratis en 2 minutos.',
     images: [
       {
         url: '/og-image.png',
@@ -55,9 +57,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Jefferson López — Presencia digital para negocios de servicio',
+    title: 'Reservas directas, sin comisión, en su WhatsApp',
     description:
-      'Webs y sistemas que convierten para negocios de servicio en LATAM. Co-fundador de FitManage.app.',
+      'Sistema de reservas directas para hospedajes, tours y rent a car en Costa Rica.',
     images: ['/og-image.png'],
   },
   robots: {
@@ -123,10 +125,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <LanguageProvider>
-          <ModalProvider>
-            {children}
-            <ContactModal />
-          </ModalProvider>
+          <DiagnosticProvider>
+            <MotionProvider>
+              {children}
+              <Diagnostic />
+            </MotionProvider>
+          </DiagnosticProvider>
         </LanguageProvider>
       </body>
     </html>

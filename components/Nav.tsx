@@ -4,14 +4,20 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import type { Transition } from 'framer-motion'
 import { useLanguage } from '@/context/LanguageContext'
-import { useModal } from '@/context/ModalContext'
+import { useDiagnostic } from '@/context/DiagnosticContext'
 import { t } from '@/lib/translations'
 
 const navTr: Transition = { duration: 0.5, ease: 'easeOut' }
 
+const LINKS = [
+  { href: '#projects', label: t.nav.projects },
+  { href: '#precios',  label: t.nav.pricing  },
+  { href: '#faq',      label: t.nav.faq      },
+]
+
 export default function Nav() {
   const { lang, toggle } = useLanguage()
-  const { openModal } = useModal()
+  const { open } = useDiagnostic()
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -33,24 +39,18 @@ export default function Nav() {
       }}
     >
       <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-4">
-        <a href="#home" className="text-[1.05rem] font-semibold tracking-tight" style={{ color: '#1c1209' }}>
+        <a href="#home" className="whitespace-nowrap text-[1.05rem] font-semibold tracking-tight" style={{ color: '#1c1209' }}>
           Jefferson López
         </a>
 
         <nav className="flex items-center gap-3">
-          <div className="hidden md:flex items-center gap-6 mr-4">
-            {[
-              { href: '#projects', label: t.nav.projects },
-              { href: '#packages', label: t.nav.packages },
-              { href: '#contact',  label: t.nav.contact  },
-            ].map(({ href, label }) => (
+          <div className="mr-4 hidden items-center gap-6 md:flex">
+            {LINKS.map(({ href, label }) => (
               <a
                 key={href}
                 href={href}
-                className="text-sm transition-colors duration-200"
+                className="text-sm transition-colors duration-200 hover:text-text-primary"
                 style={{ color: '#7a6045' }}
-                onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#1c1209' }}
-                onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color = '#7a6045' }}
               >
                 {label[lang]}
               </a>
@@ -59,27 +59,19 @@ export default function Nav() {
 
           <button
             onClick={toggle}
-            className="cursor-pointer rounded-full text-xs font-medium transition-all duration-200"
-            style={{
-              border: '1px solid rgba(28,18,9,0.14)',
-              background: 'rgba(28,18,9,0.04)',
-              color: '#7a6045',
-              padding: '4px 12px',
-            }}
-            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.color = '#1c1209' }}
-            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.color = '#7a6045' }}
+            className="cursor-pointer rounded-full px-3 py-1 text-xs font-medium transition-colors duration-200 hover:text-text-primary"
+            style={{ background: 'rgba(28,18,9,0.05)', color: '#7a6045' }}
           >
             {t.nav.langToggle[lang]}
           </button>
 
           <button
-            onClick={() => openModal()}
-            className="rounded-lg text-sm font-semibold text-white cursor-pointer transition-all duration-200"
-            style={{ background: '#8b4513', padding: '6px 16px', border: 'none' }}
-            onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = '#b5642a' }}
-            onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = '#8b4513' }}
+            onClick={open}
+            className="cursor-pointer whitespace-nowrap rounded-lg bg-accent text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-bright"
+            style={{ padding: '6px 14px' }}
           >
-            {t.nav.cta[lang]}
+            <span className="sm:hidden">{t.nav.ctaShort[lang]}</span>
+            <span className="hidden sm:inline">{t.nav.cta[lang]}</span>
           </button>
         </nav>
       </div>
