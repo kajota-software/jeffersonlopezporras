@@ -1,10 +1,12 @@
 'use client'
 
+import Link from 'next/link'
 import { useLanguage } from '@/context/LanguageContext'
 import { t } from '@/lib/translations'
 
-export default function Footer() {
-  const { lang } = useLanguage()
+export default function Footer({ onBlog = false }: { onBlog?: boolean }) {
+  const ctx = useLanguage()
+  const lang = onBlog ? 'es' : ctx.lang
 
   return (
     <footer style={{ borderTop: '1px solid rgba(28,18,9,0.09)' }}>
@@ -13,7 +15,10 @@ export default function Footer() {
           {t.footer.left[lang]}
         </span>
 
-        <div className="flex items-center gap-6">
+        <div className="flex flex-wrap items-center gap-6">
+          <Link href="/blog" className="text-sm transition-colors duration-200 hover:text-text-primary" style={{ color: '#7a6045' }}>
+            {t.nav.blog[lang]}
+          </Link>
           {[
             { href: 'https://fitmanage.app', label: t.footer.fitmanage[lang] },
             { href: 'https://www.linkedin.com/in/jeff-lp', label: 'LinkedIn' },

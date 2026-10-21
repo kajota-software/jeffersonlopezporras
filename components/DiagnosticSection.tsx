@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
 import { useDiagnostic } from '@/context/DiagnosticContext'
 import { t, diag } from '@/lib/translations'
@@ -10,8 +11,15 @@ import OptionList from '@/components/diagnostic/OptionList'
 // Muestra la primera pregunta en la página; al responder, el diagnóstico sigue en pantalla completa
 export default function DiagnosticSection() {
   const { lang } = useLanguage()
-  const { answers, answer } = useDiagnostic()
+  const { answers, answer, open } = useDiagnostic()
   const s = t.diagnosticSection
+
+  // /?diagnostico=1 (enlaces del blog): abre el diagnóstico al cargar y limpia la URL
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get('diagnostico') !== '1') return
+    window.history.replaceState(null, '', window.location.pathname)
+    open()
+  }, [open])
 
   return (
     <section id="diagnostico" className="py-24 md:py-32 section-border" style={{ background: 'rgba(139,69,19,0.04)' }}>

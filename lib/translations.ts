@@ -16,6 +16,7 @@ export const t = {
     projects:   { es: 'Proyectos', en: 'Projects' },
     pricing:    { es: 'Precios',   en: 'Pricing'  },
     faq:        { es: 'Preguntas', en: 'FAQ'      },
+    blog:       { es: 'Blog',      en: 'Blog (ES)' },
     cta:        { es: 'Diagnóstico gratis', en: 'Free assessment' },
     ctaShort:   { es: 'Diagnóstico',        en: 'Assessment'      },
     langToggle: { es: 'EN', en: 'ES' },
