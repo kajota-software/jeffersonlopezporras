@@ -3,6 +3,9 @@ export type L = { es: string; en: string }
 export interface ProjectItem {
   logoSrc: string
   logoAlt: string
+  // Medidas del archivo, para reservar el espacio antes de que cargue
+  logoWidth: number
+  logoHeight: number
   invertLogo?: boolean
   name: string
   category: L
@@ -16,7 +19,7 @@ export const t = {
     projects:   { es: 'Proyectos', en: 'Projects' },
     pricing:    { es: 'Precios',   en: 'Pricing'  },
     faq:        { es: 'Preguntas', en: 'FAQ'      },
-    blog:       { es: 'Blog',      en: 'Blog (ES)' },
+    blog:       { es: 'Blog',      en: 'Blog (Spanish)' },
     cta:        { es: 'Diagnóstico gratis', en: 'Free assessment' },
     ctaShort:   { es: 'Diagnóstico',        en: 'Assessment'      },
     langToggle: { es: 'EN', en: 'ES' },
@@ -101,11 +104,11 @@ export const t = {
       },
       {
         a: { es: 'Nadie la encuentra', en: 'Nobody finds it' },
-        b: { es: 'Ficha de Google lista para aparecer en búsquedas locales', en: 'Google Business Profile ready to show up in local searches' },
+        b: { es: 'Sitio rápido y optimizado para aparecer en Google', en: 'Fast site optimized to show up on Google' },
       },
       {
         a: { es: 'No sabe si funciona', en: "You don't know if it works" },
-        b: { es: 'Reporte mensual con visitas, clics y reservas', en: 'Monthly report with visits, clicks and bookings' },
+        b: { es: 'Píxel de Meta y medición instalados desde el primer día', en: 'Meta Pixel and tracking set up from day one' },
       },
       {
         a: { es: 'Se entrega y se olvida', en: 'Delivered and forgotten' },
@@ -127,8 +130,23 @@ export const t = {
     },
     items: [
       {
+        logoSrc: '/logos/fma.png',
+        logoAlt: 'Fit Manage App',
+        logoWidth: 360,
+        logoHeight: 360,
+        name: 'Fit Manage App',
+        category: { es: 'Software propio', en: 'Own software' },
+        done: {
+          es: 'Plataforma para entrenadores personales con más de 10,000 usuarios en Latinoamérica, en producción desde 2023. Prueba de que construyo sistemas, no solo páginas.',
+          en: 'A platform for personal trainers with more than 10,000 users across Latin America, live since 2023. Proof that I build systems, not just pages.',
+        },
+        url: 'https://fitmanage.app',
+      },
+      {
         logoSrc: '/logos/sloth.png',
         logoAlt: 'Sloth RentACar',
+        logoWidth: 720,
+        logoHeight: 220,
         invertLogo: true,
         name: 'Sloth RentACar',
         category: { es: 'Rent a car', en: 'Car rental' },
@@ -145,6 +163,8 @@ export const t = {
       {
         logoSrc: '/logos/logofbv.png',
         logoAlt: 'Finca Buena Vista',
+        logoWidth: 360,
+        logoHeight: 360,
         name: 'Finca Buena Vista Turrialba',
         category: { es: 'Hospedaje', en: 'Lodging' },
         pain: {
@@ -160,6 +180,8 @@ export const t = {
       {
         logoSrc: '/logos/serenia.png',
         logoAlt: 'Serenia CR',
+        logoWidth: 360,
+        logoHeight: 360,
         name: 'Serenia CR',
         category: { es: 'Bienestar', en: 'Wellness' },
         pain: {
@@ -171,18 +193,7 @@ export const t = {
           en: 'We built a page that answers before they ask.',
         },
         url: 'https://sereniacr.com',
-      },
-      {
-        logoSrc: '/logos/fma.png',
-        logoAlt: 'FitManage',
-        name: 'FitManage',
-        category: { es: 'Software propio', en: 'Own software' },
-        done: {
-          es: 'Plataforma para entrenadores personales con más de 10,000 usuarios en Latinoamérica, en producción desde 2023. Prueba de que construyo sistemas, no solo páginas.',
-          en: 'A platform for personal trainers with more than 10,000 users across Latin America, live since 2023. Proof that I build systems, not just pages.',
-        },
-        url: 'https://fitmanage.app',
-      },
+      }
     ] satisfies ProjectItem[] as ProjectItem[],
   },
 
@@ -209,8 +220,8 @@ export const t = {
         num: '03',
         title: { es: 'Recibe reservas en su WhatsApp', en: 'Bookings arrive on your WhatsApp' },
         desc: {
-          es: 'Cada mes le envío un reporte con lo que le trajo el sistema.',
-          en: 'Every month I send you a report showing what the system brought in.',
+          es: 'El turista le escribe con fechas y personas definidas, listo para reservar. Si necesita cambios en el sitio, me los pide por WhatsApp.',
+          en: 'Travelers message you with dates and guests already set, ready to book. If you need changes to the site, just ask me on WhatsApp.',
         },
       },
     ],
@@ -230,26 +241,26 @@ export const t = {
         value: '$1,200',
       },
       {
-        label: { es: 'Ficha de Google lista para vender', en: 'Google Business Profile set up to sell' },
-        value: '$250',
-      },
-      {
-        label: { es: 'Medición y reporte del primer mes', en: 'Tracking and first-month report' },
-        value: '$150',
-      },
-      {
         label: { es: '30 días de ajustes ilimitados', en: '30 days of unlimited adjustments' },
         value: '$200',
       },
     ],
     totalLabel:  { es: 'Valor total',  en: 'Total value'     },
-    total: '$1,800',
+    total: '$1,400',
     investLabel: { es: 'Su inversión', en: 'Your investment' },
     invest: { es: '$990 + $59/mes', en: '$990 + $59/month' },
-    guaranteeLabel: { es: 'Garantía de entrega', en: 'On-time delivery guarantee' },
-    guaranteeText: {
-      es: 'Si su sistema no está publicado en 14 días hábiles desde que recibo sus fotos y textos, el primer mes de mensualidad va por mi cuenta. El dominio y el contenido son suyos: si un día se va, se lleva todo.',
-      en: "If your system isn't live within 14 business days of receiving your photos and copy, your first month is on me. The domain and content are yours: if you ever leave, you take everything with you.",
+    guarantees: [
+      {
+        label: { es: 'Garantía de entrega', en: 'On-time delivery guarantee' },
+        text: {
+          es: 'Si su sistema no está publicado en 14 días hábiles desde que recibo sus fotos y textos, el primer mes de mensualidad va por mi cuenta.',
+          en: "If your system isn't live within 14 business days of receiving your photos and copy, your first month is on me.",
+        },
+      },
+    ],
+    ownership: {
+      es: 'El dominio y el contenido son suyos: si un día se va, se lleva todo.',
+      en: 'The domain and content are yours: if you ever leave, you take everything with you.',
     },
   },
 
@@ -270,8 +281,20 @@ export const t = {
           en: 'For businesses starting from scratch that need to be found.',
         },
         includes: {
-          es: ['Sitio de una página', 'Ficha de Google', 'Botón de WhatsApp'],
-          en: ['One-page website', 'Google Business Profile', 'WhatsApp button'],
+          es: [
+            'Sitio de una página con fotos, servicios y precios',
+            'Diseño pensado para el celular',
+            'Ubicación con mapa y cómo llegar',
+            'Botón de WhatsApp con mensaje prellenado',
+            'Hosting y seguridad incluidos',
+          ],
+          en: [
+            'One-page website with photos, services and prices',
+            'Designed for mobile first',
+            'Location with map and directions',
+            'WhatsApp button with a pre-filled message',
+            'Hosting and security included',
+          ],
         },
       },
       {
@@ -282,41 +305,81 @@ export const t = {
           en: 'For businesses that want their own bookings every month.',
         },
         includes: {
-          es: ['Todo lo de la oferta', 'Garantía de entrega en 14 días'],
-          en: ['Everything in the offer', '14-day delivery guarantee'],
+          es: [
+            'Todo lo de Esencial',
+            'Sitio bilingüe (español e inglés)',
+            'Una página de detalle por habitación, tour o vehículo',
+            'Formulario que califica al cliente antes de pasar a WhatsApp',
+            'Mensaje de WhatsApp listo con fechas, personas y servicio',
+            'Píxel de Meta y medición de visitas y clics',
+            '30 días de ajustes ilimitados',
+            'Garantía de entrega en 14 días',
+          ],
+          en: [
+            'Everything in Essential',
+            'Bilingual site (Spanish and English)',
+            'A detail page for each room, tour or vehicle',
+            'Form that qualifies the customer before WhatsApp',
+            'WhatsApp message ready with dates, guests and service',
+            'Meta Pixel plus visit and click tracking',
+            '30 days of unlimited adjustments',
+            '14-day delivery guarantee',
+          ],
         },
       },
       {
-        name: { es: 'Reserva Directa + Anuncios', en: 'Direct Booking + Ads' },
-        price: { es: '$990 + $59/mes', en: '$990 + $59/month' },
-        priceNote: {
-          es: '+ $250/mes de gestión (la pauta va aparte)',
-          en: '+ $250/month management (ad spend not included)',
-        },
+        name: { es: 'Reserva Directa + Gestión', en: 'Direct Booking + Management' },
+        price: { es: 'Desde $2,500 + $99/mes', en: 'From $2,500 + $99/month' },
         forWho: {
-          es: 'Para quien ya recibe reservas y quiere más volumen.',
-          en: 'For businesses already getting bookings that want more volume.',
+          es: 'Para quien ya tiene reservas y las lleva en un cuaderno, en Excel o en el chat.',
+          en: 'For businesses that already have bookings and track them in a notebook, a spreadsheet or the chat.',
         },
         includes: {
-          es: ['Todo lo anterior', 'Gestión de Meta o Google Ads'],
-          en: ['Everything above', 'Meta or Google Ads management'],
+          es: [
+            'Todo lo de Reserva Directa',
+            'Panel privado con login',
+            'Calendario de reservas y disponibilidad',
+            'Avisos y confirmaciones por correo',
+            'Manejo de clientes',
+            'Contabilidad básica',
+            'Reportes automáticos que usted consulta cuando quiera',
+          ],
+          en: [
+            'Everything in Direct Booking',
+            'Private dashboard with login',
+            'Booking and availability calendar',
+            'Email notifications and confirmations',
+            'Customer management',
+            'Basic accounting',
+            'Automatic reports you can check anytime',
+          ],
+        },
+        // Es la base: lo demás se define según la operación de cada negocio
+        closingNote: {
+          es: 'Esta es la base. En una sesión de 60 minutos evaluamos sus necesidades para ver si hace falta agregar algo más; el precio final depende de eso.',
+          en: "This is the foundation. In a 60-minute session we review your needs to see if anything else should be added; the final price depends on that.",
         },
       },
     ],
+    addon: {
+      es: 'Complemento para cualquier plan: gestión de anuncios en Meta o Google, $250/mes (la pauta va aparte).',
+      en: 'Add-on for any plan: Meta or Google ads management, $250/month (ad spend not included).',
+    },
     custom: {
-      es: '¿Su negocio no es turístico o necesita una herramienta propia? Sistema a medida, desde $5,000.',
-      en: "Not a tourism business, or need a tool of your own? Custom system, from $5,000.",
+      es: '¿Su negocio no es turístico o necesita algo fuera del panel? Sistema a medida, desde $5,000.',
+      en: 'Not a tourism business, or need something beyond the dashboard? Custom system, from $5,000.',
     },
     note: {
-      es: 'La mensualidad incluye hosting, dominio, seguridad, hasta 1 hora de cambios al mes y el reporte mensual.',
-      en: 'The monthly fee includes hosting, domain, security, up to 1 hour of changes per month and the monthly report.',
+      es: 'La mensualidad incluye hosting, seguridad y cambios mensuales. El dominio va aparte: se registra a su nombre y lo paga usted.',
+      en: 'The monthly fee includes hosting, security and monthly changes. The domain is separate: it is registered in your name and you pay for it directly.',
     },
   },
 
   about: {
+    h2: { es: 'Quién está detrás', en: "Who's behind this" },
     p1: {
-      es: 'Soy Jefferson, programador de Turrialba. Fundé FitManage, un software que hoy usan más de 10,000 entrenadores en Latinoamérica.',
-      en: "I'm Jefferson, a developer from Turrialba. I founded FitManage, software now used by more than 10,000 trainers across Latin America.",
+      es: 'Soy Jefferson, programador de Turrialba. Fundé FitManage, un software que hoy tiene más de 10,000 usuarios en Latinoamérica.',
+      en: "I'm Jefferson, a developer from Turrialba. I founded FitManage, software that now has more than 10,000 users across Latin America.",
     },
     p2: {
       es: 'Ahí aprendí que la gente no compra cuando la página es bonita: compra cuando encuentra respuestas antes de tener que preguntar. Hoy aplico eso para que negocios turísticos como el suyo reciban reservas propias.',
@@ -337,8 +400,8 @@ export const t = {
       {
         q: { es: 'Ya pagué una web y no sirvió.', en: "I already paid for a website and it didn't work." },
         a: {
-          es: 'Por eso no le entrego solo una página: le entrego un sistema pensado para que el turista llegue hasta el mensaje de reserva, con un reporte mensual para que vea qué le trae.',
-          en: "That's why I don't just hand you a page: I deliver a system designed to take travelers all the way to the booking message, with a monthly report so you can see what it brings in.",
+          es: 'Por eso no le entrego solo una página: le entrego un sistema pensado para que el turista llegue hasta el mensaje de reserva, con el mantenimiento y los cambios incluidos cada mes.',
+          en: "That's why I don't just hand you a page: I deliver a system designed to take travelers all the way to the booking message, with maintenance and changes included every month.",
         },
       },
       {
@@ -351,13 +414,23 @@ export const t = {
       {
         q: { es: '¿Y si no recibo reservas?', en: "What if I don't get any bookings?" },
         a: {
-          es: 'Cada mes le envío un reporte con visitas, clics y reservas, y con esa información ajustamos lo que no esté funcionando. La mensualidad incluye hasta 1 hora de cambios al mes.',
-          en: "Every month I send you a report with visits, clicks and bookings, and we use it to adjust whatever isn't working. The monthly fee includes up to 1 hour of changes per month.",
+          es: 'El sitio lleva al turista hasta su WhatsApp, pero las reservas también dependen de que le llegue tráfico: su ficha de Google, sus redes y, si quiere acelerar, anuncios. Si algo del sitio no está funcionando, los cambios están incluidos en la mensualidad.',
+          en: "The site takes travelers all the way to your WhatsApp, but bookings also depend on getting traffic to it: your Google profile, your social media and, if you want to speed things up, ads. If something on the site isn't working, changes are included in the monthly fee.",
+        },
+      },
+      {
+        q: { es: '¿Qué incluye el panel de Gestión?', en: 'What does the Management dashboard include?' },
+        a: {
+          es: 'Un acceso privado con la base para llevar su negocio: calendario de reservas y disponibilidad, avisos y confirmaciones por correo, manejo de clientes, contabilidad básica y reportes automáticos que usted consulta cuando quiera. Luego evaluamos sus necesidades para ver si hace falta agregar algo más.',
+          en: 'A private login with the foundation to run your business: booking and availability calendar, email notifications and confirmations, customer management, basic accounting and automatic reports you can check anytime. Then we review your needs to see if anything else should be added.',
         },
       },
       {
         q: { es: '¿El dominio es mío?', en: 'Is the domain mine?' },
-        a: { es: 'Sí, siempre.', en: 'Yes, always.' },
+        a: {
+          es: 'Sí, siempre. Se registra a su nombre y lo paga usted aparte, así es suyo aunque un día deje de trabajar conmigo.',
+          en: "Yes, always. It is registered in your name and you pay for it separately, so it stays yours even if you stop working with me.",
+        },
       },
       {
         q: { es: '¿Cuánto tarda?', en: 'How long does it take?' },
@@ -380,8 +453,8 @@ export const t = {
   diagnosticSection: {
     h2: { es: 'Diagnóstico gratis', en: 'Free assessment' },
     sub: {
-      es: 'Responda 8 preguntas y sepa cuántas reservas se le están escapando y qué plan le corresponde.',
-      en: "Answer 8 questions and find out how many bookings are slipping away and which plan fits you.",
+      es: 'Responda 9 preguntas y sepa cuántas reservas se le están escapando y qué plan le corresponde.',
+      en: "Answer 9 questions and find out how many bookings are slipping away and which plan fits you.",
     },
   },
 
@@ -392,8 +465,20 @@ export const t = {
     },
   },
 
+  guides: {
+    h2: {
+      es: 'Guías gratis para recibir más reservas directas',
+      en: 'Free guides to get more direct bookings',
+    },
+    note: { es: '', en: 'The guides are written in Spanish.' },
+    read: { es: 'Leer guía', en: 'Read guide' },
+    all: { es: 'Ver todas las guías', en: 'See all guides' },
+  },
+
   footer: {
     year:      { es: '© 2026', en: '© 2026' },
+    whatsapp:  { es: '¿Prefiere escribir directo?', en: 'Prefer to message directly?' },
+    whatsappMsg: { es: 'Hola Jeff, vengo de su web.', en: 'Hi Jeff, I found you through your website.' },
     fitmanage: { es: 'FitManage.app', en: 'FitManage.app' },
     cr:        { es: 'Hecho en Costa Rica 🇨🇷', en: 'Made in Costa Rica 🇨🇷' },
   },
@@ -472,6 +557,14 @@ export const diag = {
       ],
     },
     {
+      q: { es: '¿Cómo lleva hoy sus reservas y cobros?', en: 'How do you keep track of bookings and payments today?' },
+      options: [
+        { es: 'Cuaderno o Excel', en: 'Notebook or spreadsheet' },
+        { es: 'En el chat de WhatsApp', en: 'In the WhatsApp chat' },
+        { es: 'Con un sistema de reservas', en: 'With a booking system' },
+      ],
+    },
+    {
       q: { es: '¿Qué quiere lograr en los próximos 3 meses?', en: 'What do you want to achieve in the next 3 months?' },
       options: [
         { es: 'Aparecer en Google y empezar a recibir reservas directas', en: 'Show up on Google and start getting direct bookings' },
@@ -530,6 +623,10 @@ export const diag = {
       es: 'Incluye la garantía de entrega: si su sistema no está publicado en 14 días hábiles desde que recibo sus fotos y textos, el primer mes de mensualidad va por mi cuenta.',
       en: "Includes the on-time delivery guarantee: if your system isn't live within 14 business days of receiving your photos and copy, your first month is on me.",
     },
+    adsNote: {
+      es: 'Le recomendamos sumar el complemento de anuncios ($250/mes + pauta).',
+      en: 'We recommend adding the ads add-on ($250/month + ad spend).',
+    },
     cta:     { es: 'Agendar mi primera reunión', en: 'Book my first meeting' },
     restart: { es: 'Empezar de nuevo',           en: 'Start over'            },
   },
@@ -543,13 +640,17 @@ export const diag = {
     slow:          { es: 'Cada hora sin responder es una reserva que se enfría.', en: 'Every hour without a reply is a booking going cold.' },
     platforms:     { es: 'La mayoría de sus reservas pagan comisión.', en: 'Most of your bookings pay a commission.' },
     fewBookings:   { es: 'Hoy casi no le llegan reservas: su negocio no está en el camino del turista.', en: "You barely get bookings today: your business isn't on the traveler's path." },
+    manualOps:     { es: 'Llevar reservas y cobros en cuaderno o en el chat hace fácil perder pagos y cruzar fechas.', en: 'Tracking bookings and payments in a notebook or the chat makes it easy to lose payments and double-book dates.' },
     solid:         { es: 'Su base es buena: el siguiente paso es convertirla en reservas directas cada mes.', en: 'You have a solid base: the next step is turning it into direct bookings every month.' },
   },
 
   plans: {
     esencial: {
       name: { es: 'Esencial', en: 'Essential' },
-      summary: { es: 'Sitio de una página, ficha de Google y botón de WhatsApp.', en: 'One-page website, Google Business Profile and WhatsApp button.' },
+      summary: {
+        es: 'Sitio de una página pensado para el celular, con fotos, servicios, precios y botón de WhatsApp con mensaje prellenado.',
+        en: 'Mobile-first one-page website with photos, services, prices and a WhatsApp button with a pre-filled message.',
+      },
       price: { es: '$590 + $39/mes', en: '$590 + $39/month' },
       investPhrase: { es: 'de $590 + $39/mes', en: '$590 + $39/month' },
       guarantee: false,
@@ -557,21 +658,21 @@ export const diag = {
     reserva: {
       name: { es: 'Reserva Directa', en: 'Direct Booking' },
       summary: {
-        es: 'Sitio de reservas bilingüe, ficha de Google, medición y reporte mensual.',
-        en: 'Bilingual booking site, Google Business Profile, tracking and monthly report.',
+        es: 'Todo lo de Esencial + sitio bilingüe con una página por habitación o tour, formulario que califica al cliente y píxel de Meta.',
+        en: 'Everything in Essential + bilingual site with a page per room or tour, a form that qualifies customers and Meta Pixel.',
       },
       price: { es: '$990 + $59/mes', en: '$990 + $59/month' },
       investPhrase: { es: 'de $990 + $59/mes', en: '$990 + $59/month' },
       guarantee: true,
     },
-    anuncios: {
-      name: { es: 'Reserva Directa + Anuncios', en: 'Direct Booking + Ads' },
+    gestion: {
+      name: { es: 'Reserva Directa + Gestión', en: 'Direct Booking + Management' },
       summary: {
-        es: 'Todo lo de Reserva Directa + gestión de Meta o Google Ads.',
-        en: 'Everything in Direct Booking + Meta or Google Ads management.',
+        es: 'Todo lo de Reserva Directa + un panel privado con calendario, avisos por correo, manejo de clientes, contabilidad básica y reportes automáticos, ajustado a su operación.',
+        en: 'Everything in Direct Booking + a private dashboard with calendar, email notifications, customer management, basic accounting and automatic reports, tailored to how you operate.',
       },
-      price: { es: '$990 + $59/mes + $250/mes de gestión (la pauta va aparte)', en: '$990 + $59/month + $250/month management (ad spend not included)' },
-      investPhrase: { es: 'de $990 + $59/mes + $250/mes de gestión', en: '$990 + $59/month + $250/month management' },
+      price: { es: 'Desde $2,500 + $99/mes', en: 'From $2,500 + $99/month' },
+      investPhrase: { es: 'desde $2,500 + $99/mes', en: 'from $2,500 + $99/month' },
       guarantee: true,
     },
     medida: {
@@ -597,7 +698,10 @@ export const diag = {
     email:    { es: 'Email (opcional)',   en: 'Email (optional)' },
     consent:  { es: 'Conozco la inversión del plan recomendado.', en: 'I understand the investment for the recommended plan.' },
     submit:   { es: 'Continuar a WhatsApp', en: 'Continue to WhatsApp' },
-    errFields:  { es: 'Complete su nombre, el nombre del negocio y su teléfono.', en: 'Please fill in your name, business name and phone.' },
+    countryCode: { es: 'Código de país', en: 'Country code' },
+    errName:     { es: 'Escriba su nombre.', en: 'Please enter your name.' },
+    errBusiness: { es: 'Escriba el nombre de su negocio.', en: 'Please enter your business name.' },
+    errPhone:    { es: 'Escriba un teléfono válido (al menos 6 dígitos).', en: 'Please enter a valid phone number (at least 6 digits).' },
     errConsent: { es: 'Confirme que conoce la inversión del plan recomendado.', en: 'Please confirm you understand the investment for the recommended plan.' },
     errEmail:   { es: 'Revise el email o déjelo en blanco.', en: 'Please check your email or leave it blank.' },
   },
@@ -612,7 +716,8 @@ Email: {email}
 Reservas llegan por: {a2}
 Web: {a3} · Google: {a4} · Respuesta WhatsApp: {a5}
 Precio promedio: {a6} · Reservas/mes: {a7}
-Meta: {a8}
+Lleva reservas en: {a8}
+Meta: {a9}{ads}
 Resultado: {result}
 Plan recomendado: {plan} — {price}
 Conozco la inversión y quiero agendar la primera reunión.`,
@@ -624,11 +729,13 @@ Email: {email}
 Bookings come from: {a2}
 Website: {a3} · Google: {a4} · WhatsApp reply time: {a5}
 Average booking: {a6} · Bookings/month: {a7}
-Goal: {a8}
+Tracks bookings in: {a8}
+Goal: {a9}{ads}
 Result: {result}
 Recommended plan: {plan} — {price}
 I understand the investment and want to book the first meeting.`,
   },
+  adsLine: { es: '\nInterés en anuncios: sí', en: '\nInterested in ads: yes' },
   resultLine: {
     es: '~{n} reservas/mes que se escapan (~{amount}/año)',
     en: '~{n} bookings/month slipping away (~{amount}/year)',

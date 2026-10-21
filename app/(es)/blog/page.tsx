@@ -7,7 +7,7 @@ import { getAllPosts, formatDate, CENTRAL_SLUG, SITE_URL } from '@/lib/blog'
 
 const TITLE = 'Blog: reservas directas para negocios turísticos'
 const DESCRIPTION =
-  'Guías prácticas para hospedajes, tours y rent a car en Costa Rica: comisiones, Google Maps, WhatsApp, reseñas y cómo recibir más reservas directas.'
+  'Guías prácticas para que su hospedaje, tour o rent a car reciba más reservas directas y dependa menos de las plataformas.'
 
 export const metadata: Metadata = {
   title: { absolute: TITLE },
@@ -46,17 +46,18 @@ export default async function BlogPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }} />
       <Nav onBlog />
       <main className="mx-auto max-w-[860px] px-6 pt-32 pb-24 md:pt-40">
-        <Reveal>
+        {/* Encabezado y artículo destacado sin animación: son lo primero que se ve */}
+        <div>
           <h1 className="font-bold leading-[1.08] tracking-tight text-text-primary" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)' }}>
             {TITLE}
           </h1>
           <p className="mt-6 max-w-[60ch] text-[1.1rem] leading-[1.7]" style={{ color: '#4a3520' }}>
             Lo que necesita saber para depender menos de las plataformas y recibir más reservas directas, explicado sin tecnicismos.
           </p>
-        </Reveal>
+        </div>
 
         {/* Artículo central, destacado */}
-        <Reveal className="mt-16 md:mt-20">
+        <div className="mt-16 md:mt-20">
           <Link href={`/blog/${featured.slug}`} className="group block py-10" style={{ borderTop: '1px solid rgba(28,18,9,0.22)', borderBottom: '1px solid rgba(28,18,9,0.22)' }}>
             <p className="text-[11px] font-semibold uppercase tracking-[0.08em]" style={{ color: '#8b4513' }}>Guía completa</p>
             <h2 className="mt-3 text-[1.75rem] font-bold leading-[1.2] tracking-tight text-text-primary transition-colors group-hover:text-accent md:text-[2.25rem]">
@@ -67,7 +68,7 @@ export default async function BlogPage() {
               {featured.minutes} min de lectura · {formatDate(featured.meta.date)}
             </p>
           </Link>
-        </Reveal>
+        </div>
 
         <ul className="mt-4">
           {rest.map((post, i) => (

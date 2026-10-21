@@ -39,7 +39,8 @@ interface DiagnosticContextType extends DiagnosticState {
   restart: () => void
 }
 
-const STORAGE_KEY = 'diagnostico-v1'
+// v2: se agregó la pregunta de cómo lleva reservas y cobros (9 preguntas)
+const STORAGE_KEY = 'diagnostico-v2'
 
 const initialState = (): DiagnosticState => ({
   answers: emptyAnswers(),

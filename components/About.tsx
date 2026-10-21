@@ -12,6 +12,9 @@ export default function About() {
     <section id="about" className="py-24 md:py-32 section-border">
       <div className="mx-auto max-w-[1100px] px-6">
         <Reveal className="max-w-[760px]">
+          <h2 className="mb-8 font-bold leading-[1.1] tracking-tight text-text-primary" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
+            {a.h2[lang]}
+          </h2>
           <p className="font-semibold leading-[1.35] tracking-tight text-text-primary" style={{ fontSize: 'clamp(1.4rem, 2.8vw, 1.9rem)' }}>
             {a.p1[lang]}
           </p>

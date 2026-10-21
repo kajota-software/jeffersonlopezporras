@@ -1,6 +1,5 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { useLanguage } from '@/context/LanguageContext'
 import { t } from '@/lib/translations'
 
@@ -11,7 +10,7 @@ export default function PhoneMockup() {
 
   return (
     <div className="mx-auto w-full max-w-[260px]" role="img" aria-label={c.msg[lang]}>
-      <div className="rounded-[2.6rem] p-2.5" style={{ background: '#1c1209', boxShadow: '0 30px 60px -20px rgba(28,18,9,0.35)' }}>
+      <div className="rounded-[2.6rem] p-2.5" style={{ background: '#1c1209' }}>
         <div className="overflow-hidden rounded-[2.1rem]" style={{ background: '#ece5dd' }}>
           {/* Barra de estado + encabezado del chat */}
           <div style={{ background: '#075e54' }}>
@@ -43,20 +42,16 @@ export default function PhoneMockup() {
             <span className="mx-auto rounded-md px-3 py-1 text-[10px] font-medium" style={{ background: '#e1f2fb', color: '#4a5a66' }}>
               {c.today[lang]}
             </span>
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: 'easeOut', delay: 0.9 }}
-              className="max-w-[85%] self-start rounded-lg rounded-tl-none bg-white px-3 py-2"
-            >
+            {/* Entrada del mensaje solo con CSS (opacity + transform) */}
+            <div className="chat-in max-w-[85%] self-start rounded-lg rounded-tl-none bg-white px-3 py-2">
               <p className="text-[13px] leading-snug" style={{ color: '#111b21' }}>{c.msg[lang]}</p>
-              <p className="mt-1 text-right text-[10px]" style={{ color: '#8696a0' }}>{c.time}</p>
-            </motion.div>
+              <p className="mt-1 text-right text-[10px]" style={{ color: '#667781' }}>{c.time}</p>
+            </div>
           </div>
 
           {/* Barra para escribir */}
           <div className="flex items-center gap-2 px-2 pb-5 pt-1">
-            <span className="flex-1 rounded-full bg-white px-4 py-2 text-[12px]" style={{ color: '#8696a0' }}>
+            <span className="flex-1 rounded-full bg-white px-4 py-2 text-[12px]" style={{ color: '#667781' }}>
               {c.input[lang]}
             </span>
             <span className="grid h-9 w-9 place-items-center rounded-full" style={{ background: '#128c7e' }} aria-hidden>

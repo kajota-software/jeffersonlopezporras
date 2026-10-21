@@ -1,10 +1,28 @@
 'use client'
 
-import { motion, MotionConfig } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 import type { ReactNode } from 'react'
 
-// Aparición al hacer scroll: fade + 20px hacia arriba, una sola vez.
-// Con prefers-reduced-motion, globals.css anula la animación ([data-reveal]).
+// Un solo IntersectionObserver para todos los elementos con aparición
+let observer: IntersectionObserver | null = null
+
+function observe(el: HTMLElement) {
+  observer ??= new IntersectionObserver(
+    entries => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue
+        ;(entry.target as HTMLElement).dataset.shown = ''
+        observer?.unobserve(entry.target) // una sola vez
+      }
+    },
+    { rootMargin: '0px 0px -60px 0px' },
+  )
+  observer.observe(el)
+  return () => observer?.unobserve(el)
+}
+
+// Aparición al hacer scroll: fade + 20px hacia arriba, una sola vez, solo con opacity y transform.
+// No usar en contenido visible al cargar. Con prefers-reduced-motion, globals.css la anula.
 export default function Reveal({
   children,
   delay = 0,
@@ -16,25 +34,23 @@ export default function Reveal({
   className?: string
   style?: React.CSSProperties
 }) {
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (ref.current) return observe(ref.current)
+  }, [])
+
   return (
-    <motion.div
+    <div
+      ref={ref}
       data-reveal
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.5, ease: 'easeOut', delay }}
       className={className}
-      style={style}
+      style={delay ? { ...style, transitionDelay: `${delay}s` } : style}
     >
       {children}
-    </motion.div>
+    </div>
   )
 }
 
 // Escalonado entre elementos hermanos
 export const stagger = (i: number) => i * 0.08
-
-// Respeta prefers-reduced-motion en todas las animaciones de framer-motion
-export function MotionProvider({ children }: { children: ReactNode }) {
-  return <MotionConfig reducedMotion="user">{children}</MotionConfig>
-}

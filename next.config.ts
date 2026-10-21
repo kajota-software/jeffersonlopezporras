@@ -4,6 +4,8 @@ import createMDX from '@next/mdx'
 const nextConfig: NextConfig = {
   // Los artículos del blog son .mdx en content/blog
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  // Dos layouts raíz, (es) y (en): la 404 global va en app/global-not-found.tsx
+  experimental: { globalNotFound: true },
   async redirects() {
     return [{ source: '/reservas', destination: '/', permanent: true }]
   },

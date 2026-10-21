@@ -1,21 +1,18 @@
 'use client'
 
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import type { Transition } from 'framer-motion'
 import { useLanguage } from '@/context/LanguageContext'
 import { t } from '@/lib/translations'
 import type { L } from '@/lib/translations'
 
-const answerTr: Transition = { duration: 0.3, ease: 'easeInOut' }
-
-function FAQItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boolean; onToggle: () => void }) {
+function FAQItem({ id, q, a, isOpen, onToggle }: { id: string; q: string; a: string; isOpen: boolean; onToggle: () => void }) {
   return (
     <div style={{ borderBottom: '1px solid rgba(28,18,9,0.09)' }}>
       <button
         onClick={onToggle}
         className="w-full flex items-center justify-between gap-6 py-5 text-left cursor-pointer"
         aria-expanded={isOpen}
+        aria-controls={id}
         style={{ background: 'none', border: 'none' }}
       >
         <span className="text-[15px] font-medium" style={{ color: '#1c1209' }}>{q}</span>
@@ -32,20 +29,10 @@ function FAQItem({ q, a, isOpen, onToggle }: { q: string; a: string; isOpen: boo
         </span>
       </button>
 
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            key="answer"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={answerTr}
-            style={{ overflow: 'hidden' }}
-          >
-            <p className="pb-5 text-[14px] leading-[1.75]" style={{ color: '#7a6045' }}>{a}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* La respuesta siempre está en el HTML; solo se muestra u oculta */}
+      <div id={id} hidden={!isOpen} className="faq-answer">
+        <p className="pb-5 text-[15px] leading-[1.75]" style={{ color: '#4a3520' }}>{a}</p>
+      </div>
     </div>
   )
 }
@@ -73,6 +60,7 @@ export default function FAQ({ id = 'faq', title = DEFAULT_TITLE, questions = t.f
           {questions.map((item, i) => (
             <FAQItem
               key={i}
+              id={`${id}-${i}`}
               q={item.q[lang]}
               a={item.a[lang]}
               isOpen={openIndex === i}

@@ -2,9 +2,14 @@ import { diag } from '@/lib/translations'
 import type { L } from '@/lib/translations'
 
 // Índices de las preguntas en diag.questions
-export const Q = { type: 0, channel: 1, web: 2, google: 3, reply: 4, price: 5, volume: 6, goal: 7 } as const
+export const Q = { type: 0, channel: 1, web: 2, google: 3, reply: 4, price: 5, volume: 6, ops: 7, goal: 8 } as const
 export const TOTAL_QUESTIONS = diag.questions.length
 export const OTHER_BUSINESS = 3
+// Opciones de Q.goal y Q.ops usadas en la recomendación
+const GOAL_GOOGLE = 0
+export const GOAL_ADS = 2
+const OPS_MANUAL = [0, 1] // cuaderno/Excel o chat
+const VOLUME_30_PLUS = 2  // "30–60" o "Más de 60"
 
 // Una respuesta = índice de la opción elegida
 export type Answers = (number | null)[]
@@ -33,10 +38,13 @@ export function estimate(a: Answers) {
 
 export function recommendPlan(a: Answers): PlanKey {
   if (a[Q.type] === OTHER_BUSINESS) return 'medida'
-  if (a[Q.goal] === 2 && a[Q.web] === 2) return 'anuncios'
-  if (a[Q.web] === 0 && a[Q.volume] === 0 && a[Q.goal] === 0) return 'esencial'
+  if (OPS_MANUAL.includes(a[Q.ops] ?? -1) && (a[Q.volume] ?? 0) >= VOLUME_30_PLUS) return 'gestion'
+  if (a[Q.web] === 0 && a[Q.volume] === 0 && a[Q.goal] === GOAL_GOOGLE) return 'esencial'
   return 'reserva'
 }
+
+// Meta "más volumen con anuncios": el resultado sugiere el complemento de anuncios
+export const wantsAds = (a: Answers) => a[Q.goal] === GOAL_ADS
 
 // Hallazgos ordenados por impacto (el peso es la tasa de pérdida que aportan)
 export function findings(a: Answers): L[] {
@@ -51,6 +59,8 @@ export function findings(a: Answers): L[] {
   if ((a[Q.reply] ?? 0) > 0) list.push({ weight: LOSS_REPLY[a[Q.reply] ?? 0], text: f.slow })
   if (a[Q.channel] === 0) list.push({ weight: 0.08, text: f.platforms })
   if (a[Q.channel] === 3) list.push({ weight: 0.09, text: f.fewBookings })
+  // Va primero: es la razón por la que se recomienda Gestión
+  if (recommendPlan(a) === 'gestion') list.push({ weight: 1, text: f.manualOps })
 
   if (list.length === 0) return [f.solid]
   return list.sort((x, y) => y.weight - x.weight).slice(0, 3).map(x => x.text)

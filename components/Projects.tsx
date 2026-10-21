@@ -3,6 +3,7 @@
 import { useLanguage } from '@/context/LanguageContext'
 import { t } from '@/lib/translations'
 import type { ProjectItem } from '@/lib/translations'
+import Image from 'next/image'
 import Reveal from '@/components/Reveal'
 
 const LABEL = 'text-[11px] font-semibold uppercase tracking-[0.08em]'
@@ -10,14 +11,16 @@ const LABEL = 'text-[11px] font-semibold uppercase tracking-[0.08em]'
 function ProjectRow({ project, logoSide, isFirst }: { project: ProjectItem; logoSide: 'left' | 'right'; isFirst: boolean }) {
   const { lang } = useLanguage()
   const labels = t.projects.labels
-  const { logoSrc, logoAlt, invertLogo, name, category, pain, done, url } = project
+  const { logoSrc, logoAlt, logoWidth, logoHeight, invertLogo, name, category, pain, done, url } = project
 
   const logoCol = (
     <Reveal className="flex min-h-[120px] items-center justify-center md:min-h-[240px]">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <Image
         src={logoSrc}
         alt={logoAlt}
+        width={logoWidth}
+        height={logoHeight}
+        sizes="(min-width: 768px) 300px, 240px"
         className="h-full max-h-[110px] w-auto max-w-[240px] object-contain md:max-h-[180px] md:max-w-[300px]"
         style={{ filter: invertLogo ? 'invert(1)' : 'none' }}
       />
@@ -48,7 +51,7 @@ function ProjectRow({ project, logoSide, isFirst }: { project: ProjectItem; logo
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-7 w-fit text-[15px] font-semibold underline-offset-4 transition-colors duration-200 hover:underline"
+        className="mt-5 inline-flex min-h-11 w-fit items-center text-[15px] font-semibold underline-offset-4 transition-colors duration-200 hover:underline"
         style={{ color: '#8b4513' }}
       >
         {labels.visit[lang]}

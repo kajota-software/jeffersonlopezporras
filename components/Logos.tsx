@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useLanguage } from '@/context/LanguageContext'
 import { t } from '@/lib/translations'
 import type { L } from '@/lib/translations'
@@ -8,38 +9,31 @@ export interface LogoItem {
   src: string
   alt: string
   invert: boolean
+  // Medidas del archivo original, para reservar el espacio antes de que cargue
+  width: number
+  height: number
 }
 
 const logos: LogoItem[] = [
-  { src: '/logos/fma.png',        alt: 'FitManage',       invert: false },
-  { src: '/logos/sloth.png',      alt: 'Sloth RentACar',  invert: true  },
-  { src: '/logos/logofbv.png',    alt: 'Finca Buena Vista', invert: false },
-  { src: '/logos/serenia.png',    alt: 'Serenia CR',      invert: false },
-  { src: '/logos/logoAltura.png', alt: 'Cliente 5',       invert: false },
+  { src: '/logos/fma.png',        alt: 'FitManage',         invert: false, width: 360,  height: 360 },
+  { src: '/logos/sloth.png',      alt: 'Sloth RentACar',    invert: true,  width: 720,  height: 220 },
+  { src: '/logos/logofbv.png',    alt: 'Finca Buena Vista', invert: false, width: 360,  height: 360 },
+  { src: '/logos/serenia.png',    alt: 'Serenia CR',        invert: false, width: 360,  height: 360 },
+  { src: '/logos/logoAltura.png', alt: 'Altura',            invert: false, width: 391,  height: 360 },
 ]
 
-function Logo({ src, alt, invert, className = 'px-10' }: LogoItem & { className?: string }) {
+// Las copias del carrusel (decorative) se ocultan a lectores de pantalla
+function Logo({ src, alt, invert, width, height, decorative = false, className = 'px-10' }: LogoItem & { decorative?: boolean; className?: string }) {
   return (
-    <div
-      className={`shrink-0 ${className} transition-opacity duration-300`}
-      style={{ opacity: 0.35 }}
-      onMouseEnter={(e) => { (e.currentTarget as HTMLDivElement).style.opacity = '0.75' }}
-      onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.opacity = '0.35' }}
-    >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+    <div className={`shrink-0 ${className} opacity-35 transition-opacity duration-300 hover:opacity-75`} aria-hidden={decorative || undefined}>
+      <Image
         src={src}
-        alt={alt}
-        height={28}
+        alt={decorative ? '' : alt}
+        width={width}
+        height={height}
+        sizes={`${Math.round((width / height) * 28)}px`}
         className="h-7 w-auto object-contain"
         style={{ filter: invert ? 'invert(1)' : 'none' }}
-        onError={(e) => {
-          const el = e.currentTarget as HTMLImageElement
-          el.style.display = 'none'
-          const div = document.createElement('div')
-          div.style.cssText = 'width:80px;height:28px;background:rgba(28,18,9,0.08);border-radius:3px'
-          el.parentElement?.appendChild(div)
-        }}
       />
     </div>
   )
@@ -74,7 +68,7 @@ export default function Logos({ label = t.logos.label, items = logos, marquee = 
         <div className="relative flex overflow-hidden">
           <div className="marquee-track flex items-center">
             {[...items, ...items].map((logo, i) => (
-              <Logo key={i} {...logo} />
+              <Logo key={i} {...logo} decorative={i >= items.length} />
             ))}
           </div>
         </div>

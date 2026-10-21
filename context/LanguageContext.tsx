@@ -1,27 +1,14 @@
 'use client'
 
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { createContext, useContext, ReactNode } from 'react'
 
 export type Lang = 'es' | 'en'
 
-interface LanguageContextType {
-  lang: Lang
-  toggle: () => void
-}
+// El idioma lo define la ruta (/ o /en) y se renderiza en el servidor
+const LanguageContext = createContext<{ lang: Lang }>({ lang: 'es' })
 
-const LanguageContext = createContext<LanguageContextType>({
-  lang: 'es',
-  toggle: () => {},
-})
-
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>('es')
-  const toggle = () => setLang((prev) => (prev === 'es' ? 'en' : 'es'))
-  return (
-    <LanguageContext.Provider value={{ lang, toggle }}>
-      {children}
-    </LanguageContext.Provider>
-  )
+export function LanguageProvider({ lang, children }: { lang: Lang; children: ReactNode }) {
+  return <LanguageContext.Provider value={{ lang }}>{children}</LanguageContext.Provider>
 }
 
 export const useLanguage = () => useContext(LanguageContext)

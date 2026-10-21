@@ -23,7 +23,7 @@ export interface Post {
   minutes: number
 }
 
-export const SITE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://jeffersonlopezporras.com'
+export { SITE_URL } from '@/lib/config'
 export const CENTRAL_SLUG = 'reservas-directas-hospedajes-costa-rica'
 
 // Orden del listado (el central va destacado aparte)

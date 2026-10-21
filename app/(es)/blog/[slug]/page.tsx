@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 import FAQ from '@/components/FAQ'
-import Reveal from '@/components/Reveal'
 import CTA from '@/components/blog/CTA'
 import { getPost, POST_SLUGS, formatDate, SITE_URL } from '@/lib/blog'
 
@@ -22,7 +21,6 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: { absolute: meta.seoTitle },
     description: meta.description,
-    keywords: [meta.keyword],
     authors: [{ name: 'Jefferson López', url: SITE_URL }],
     alternates: { canonical: url },
     openGraph: {
@@ -101,7 +99,8 @@ export default async function PostPage({ params }: Params) {
             </ol>
           </nav>
 
-          <Reveal>
+          {/* Sin animación: título, intro e índice son lo primero que se ve */}
+          <div>
             <h1 className="mt-8 font-bold leading-[1.1] tracking-tight text-text-primary" style={{ fontSize: 'clamp(2rem, 5vw, 3rem)' }}>
               {meta.title}
             </h1>
@@ -109,10 +108,9 @@ export default async function PostPage({ params }: Params) {
               Por <span className="font-medium text-text-primary">Jefferson López</span> · <time dateTime={meta.date}>{formatDate(meta.date)}</time> · {minutes} min de lectura
             </p>
             <p className="mt-10 text-[1.2rem] font-medium leading-[1.7] text-text-primary md:text-[1.3rem]">{meta.intro}</p>
-          </Reveal>
+          </div>
 
-          <Reveal>
-            <nav aria-labelledby="toc" className="mt-12 py-8" style={{ borderTop: DIVIDER, borderBottom: DIVIDER }}>
+          <nav aria-labelledby="toc" className="mt-12 py-8" style={{ borderTop: DIVIDER, borderBottom: DIVIDER }}>
               <p id="toc" className={LABEL} style={{ color: '#7a6045' }}>En este artículo</p>
               <ol className="mt-4 flex flex-col gap-2.5">
                 {headings.map((h, i) => (
@@ -122,8 +120,7 @@ export default async function PostPage({ params }: Params) {
                   </li>
                 ))}
               </ol>
-            </nav>
-          </Reveal>
+          </nav>
 
           <div className="mt-4">
             <Content />

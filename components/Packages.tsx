@@ -32,18 +32,18 @@ export default function Packages() {
                 className={`flex flex-col py-10 ${highlighted ? 'rounded-2xl px-6 md:-mx-6 md:px-6' : ''}`}
                 style={highlighted ? { background: 'rgba(139,69,19,0.06)' } : undefined}
               >
-                <p className={`${LABEL} mb-3 ${highlighted ? '' : 'hidden md:invisible md:block'}`} style={{ color: '#8b4513' }}>
-                  {pk.recommended[lang]}
-                </p>
+                {/* La etiqueta existe solo en la tarjeta recomendada; en las otras, un espacio vacío mantiene la alineación */}
+                {highlighted ? (
+                  <p className={`${LABEL} mb-3`} style={{ color: '#8b4513' }}>{pk.recommended[lang]}</p>
+                ) : (
+                  <div aria-hidden className="mb-3 hidden h-[17px] md:block" />
+                )}
                 <h3 className="text-2xl font-bold tracking-tight text-text-primary">{item.name[lang]}</h3>
                 <p className="mt-3 text-[1.75rem] font-bold leading-tight tracking-tight tabular-nums" style={{ color: highlighted ? '#8b4513' : '#1c1209' }}>
                   {item.price[lang]}
                 </p>
-                {'priceNote' in item && item.priceNote && (
-                  <p className="mt-1.5 text-[13px] leading-[1.5]" style={{ color: '#7a6045' }}>{item.priceNote[lang]}</p>
-                )}
                 <p className="mt-5 text-[15px] leading-[1.7]" style={{ color: '#4a3520' }}>{item.forWho[lang]}</p>
-                <ul className="mt-5 mb-8 flex flex-1 flex-col gap-2">
+                <ul className={`mt-5 flex flex-col gap-2 ${'closingNote' in item ? '' : 'mb-8 flex-1'}`}>
                   {item.includes[lang].map(inc => (
                     <li key={inc} className="flex gap-3 text-[15px] text-text-primary">
                       <span aria-hidden style={{ color: '#8b4513' }}>—</span>
@@ -51,6 +51,9 @@ export default function Packages() {
                     </li>
                   ))}
                 </ul>
+                {'closingNote' in item && item.closingNote && (
+                  <p className="mt-5 mb-8 flex-1 text-[13px] leading-[1.6]" style={{ color: '#7a6045' }}>{item.closingNote[lang]}</p>
+                )}
                 <button
                   type="button"
                   onClick={open}
@@ -67,14 +70,15 @@ export default function Packages() {
           })}
         </div>
 
-        <Reveal className="mt-14 pt-8" style={{ borderTop: '1px solid rgba(28,18,9,0.09)' }}>
+        <Reveal className="mt-14 flex flex-col gap-3 pt-8" style={{ borderTop: '1px solid rgba(28,18,9,0.09)' }}>
+          <p className="text-[1.05rem] leading-[1.7] text-text-primary">{pk.addon[lang]}</p>
           <p className="text-[1.05rem] leading-[1.7] text-text-primary">
             {pk.custom[lang]}{' '}
             <button type="button" onClick={open} className="cursor-pointer font-semibold underline-offset-4 hover:underline" style={{ color: '#8b4513' }}>
               {t.cta.start[lang]} →
             </button>
           </p>
-          <p className="mt-3 text-[13px] leading-[1.6]" style={{ color: '#7a6045' }}>{pk.note[lang]}</p>
+          <p className="text-[13px] leading-[1.6]" style={{ color: '#7a6045' }}>{pk.note[lang]}</p>
         </Reveal>
       </div>
     </section>

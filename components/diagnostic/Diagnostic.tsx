@@ -1,13 +1,13 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, MotionConfig } from 'framer-motion'
 import { useLanguage } from '@/context/LanguageContext'
 import { useDiagnostic } from '@/context/DiagnosticContext'
 import type { Step } from '@/context/DiagnosticContext'
 import { diag } from '@/lib/translations'
 import {
-  estimate, recommendPlan, findings, formatUSD, fill, Q, TOTAL_QUESTIONS, OTHER_BUSINESS,
+  estimate, recommendPlan, findings, wantsAds, formatUSD, fill, Q, TOTAL_QUESTIONS, OTHER_BUSINESS,
 } from '@/lib/diagnostic'
 import { buildWhatsAppUrl } from '@/lib/whatsapp'
 import { track, trackWhatsAppClick } from '@/lib/analytics'
@@ -51,10 +51,10 @@ function QuestionScreen({ index }: { index: number }) {
 
   return (
     <div>
-      <h2 className="mb-6 text-2xl font-bold leading-snug text-text-primary md:mb-8 md:text-[1.9rem]">
+      <h2 id={`diag-modal-q${index}`} className="mb-6 text-2xl font-bold leading-snug text-text-primary md:mb-8 md:text-[1.9rem]">
         {question.q[lang]}
       </h2>
-      <OptionList options={question.options} selected={picked ?? answers[index]} onSelect={select} />
+      <OptionList options={question.options} selected={picked ?? answers[index]} onSelect={select} labelledBy={`diag-modal-q${index}`} />
     </div>
   )
 }
@@ -155,6 +155,9 @@ function ResultScreen() {
         <p className="mt-2 text-[15px] leading-[1.7]" style={{ color: '#4a3520' }}>{plan.summary[lang]}</p>
         <p className="mt-5 text-[13px]" style={{ color: '#7a6045' }}>{r.investLabel[lang]}</p>
         <p className="mt-1 text-xl font-bold md:text-2xl" style={{ color: '#8b4513' }}>{plan.price[lang]}</p>
+        {wantsAds(answers) && (
+          <p className="mt-3 text-[15px] font-medium leading-[1.7] text-text-primary">{r.adsNote[lang]}</p>
+        )}
         {plan.guarantee && (
           <p className="mt-5 text-[14px] leading-[1.7]" style={{ color: '#4a3520' }}>{r.guarantee[lang]}</p>
         )}
@@ -162,7 +165,7 @@ function ResultScreen() {
 
       <div className="mt-10 flex flex-col items-start gap-5">
         <button type="button" onClick={goToContact} className={PRIMARY_BTN}>{r.cta[lang]}</button>
-        <button type="button" onClick={restart} className="cursor-pointer text-[13px] underline-offset-4 hover:underline" style={{ color: '#7a6045' }}>
+        <button type="button" onClick={restart} className="inline-flex min-h-11 cursor-pointer items-center text-[13px] underline-offset-4 hover:underline" style={{ color: '#7a6045' }}>
           {r.restart[lang]}
         </button>
       </div>
@@ -170,23 +173,33 @@ function ResultScreen() {
   )
 }
 
+type FieldKey = 'name' | 'business' | 'phone' | 'email' | 'consent'
+type Errors = Partial<Record<FieldKey, string>>
+
 function ContactScreen() {
   const { lang } = useLanguage()
   const { answers, form, updateForm } = useDiagnostic()
-  const [error, setError] = useState<string | null>(null)
+  const [errors, setErrors] = useState<Errors>({})
   const c = diag.contact
   const planKey = recommendPlan(answers)
   const plan = diag.plans[planKey]
 
+  const validate = (): Errors => {
+    const e: Errors = {}
+    if (!form.name.trim()) e.name = c.errName[lang]
+    if (!form.business.trim()) e.business = c.errBusiness[lang]
+    if (form.phone.replace(/\D/g, '').length < 6) e.phone = c.errPhone[lang]
+    if (form.email.trim() && !/^\S+@\S+\.\S+$/.test(form.email.trim())) e.email = c.errEmail[lang]
+    if (!form.consent) e.consent = c.errConsent[lang]
+    return e
+  }
+
   const submit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (!form.name.trim() || !form.business.trim() || form.phone.replace(/\D/g, '').length < 6) {
-      setError(c.errFields[lang]); return
-    }
-    if (form.email.trim() && !/^\S+@\S+\.\S+$/.test(form.email.trim())) {
-      setError(c.errEmail[lang]); return
-    }
-    if (!form.consent) { setError(c.errConsent[lang]); return }
+    const found = validate()
+    setErrors(found)
+    const first = (Object.keys(found) as FieldKey[])[0]
+    if (first) { document.getElementById(`contact-${first}`)?.focus(); return }
 
     const opt = (q: number) => {
       const a = answers[q]
@@ -201,7 +214,8 @@ function ContactScreen() {
       phone: `${form.countryCode} ${form.phone.trim()}`,
       email: form.email.trim() || '—',
       a2: opt(Q.channel), a3: opt(Q.web), a4: opt(Q.google), a5: opt(Q.reply),
-      a6: opt(Q.price), a7: opt(Q.volume), a8: opt(Q.goal),
+      a6: opt(Q.price), a7: opt(Q.volume), a8: opt(Q.ops), a9: opt(Q.goal),
+      ads: wantsAds(answers) ? diag.adsLine[lang] : '',
       result: isCustom ? '—' : fill(diag.resultLine[lang], { n: lost, amount: formatUSD(yearly) }),
       plan: plan.name[lang],
       price: plan.price[lang],
@@ -211,17 +225,36 @@ function ContactScreen() {
     window.open(buildWhatsAppUrl(message), '_blank', 'noopener,noreferrer')
   }
 
-  const field = (key: 'name' | 'business' | 'email', label: string, type = 'text', autoComplete?: string) => (
-    <label className="block">
-      <span className="mb-2 block text-[13px] font-medium" style={{ color: '#4a3520' }}>{label}</span>
+  const change = (key: FieldKey, patch: Partial<typeof form>) => {
+    updateForm(patch)
+    if (errors[key]) setErrors(prev => ({ ...prev, [key]: undefined }))
+  }
+
+  // Props de accesibilidad de un campo: estado inválido y mensaje de error asociado
+  const a11y = (key: FieldKey) => ({
+    id: `contact-${key}`,
+    'aria-invalid': errors[key] ? true : undefined,
+    'aria-describedby': errors[key] ? `contact-${key}-error` : undefined,
+  })
+  const errorText = (key: FieldKey) =>
+    errors[key] && (
+      <p id={`contact-${key}-error`} className="mt-2 text-[14px]" style={{ color: '#a84513' }}>{errors[key]}</p>
+    )
+
+  const field = (key: 'name' | 'business' | 'email', label: string, type: string, autoComplete: string, required = true) => (
+    <div>
+      <label htmlFor={`contact-${key}`} className="mb-2 block text-[13px] font-medium" style={{ color: '#4a3520' }}>{label}</label>
       <input
+        {...a11y(key)}
         type={type}
         value={form[key]}
         autoComplete={autoComplete}
-        onChange={e => { updateForm({ [key]: e.target.value }); setError(null) }}
+        required={required}
+        onChange={e => change(key, { [key]: e.target.value })}
         className={INPUT_CLASS}
       />
-    </label>
+      {errorText(key)}
+    </div>
   )
 
   return (
@@ -234,12 +267,13 @@ function ContactScreen() {
         {field('name', `${c.name[lang]} *`, 'text', 'name')}
         {field('business', `${c.business[lang]} *`, 'text', 'organization')}
         <div>
-          <span className="mb-2 block text-[13px] font-medium" style={{ color: '#4a3520' }}>{c.phone[lang]} *</span>
+          <label htmlFor="contact-phone" className="mb-2 block text-[13px] font-medium" style={{ color: '#4a3520' }}>{c.phone[lang]} *</label>
           <div className="flex gap-2">
             <select
               value={form.countryCode}
               onChange={e => updateForm({ countryCode: e.target.value })}
-              aria-label={c.phone[lang]}
+              aria-label={c.countryCode[lang]}
+              autoComplete="tel-country-code"
               className={`${INPUT_BASE} w-[132px] shrink-0 px-3`}
             >
               {COUNTRY_CODES.map(cc => (
@@ -247,31 +281,35 @@ function ContactScreen() {
               ))}
             </select>
             <input
+              {...a11y('phone')}
               type="tel"
               inputMode="tel"
               autoComplete="tel-national"
+              required
               value={form.phone}
-              onChange={e => { updateForm({ phone: e.target.value }); setError(null) }}
-              aria-label={c.phone[lang]}
+              onChange={e => change('phone', { phone: e.target.value })}
               className={`${INPUT_BASE} flex-1`}
             />
           </div>
+          {errorText('phone')}
         </div>
-        {field('email', c.email[lang], 'email', 'email')}
+        {field('email', c.email[lang], 'email', 'email', false)}
 
-        <label className="flex cursor-pointer items-start gap-3 pt-1">
-          <input
-            type="checkbox"
-            checked={form.consent}
-            onChange={e => { updateForm({ consent: e.target.checked }); setError(null) }}
-            className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer"
-            style={{ accentColor: '#8b4513' }}
-          />
-          <span className="text-[15px] leading-[1.5] text-text-primary">{c.consent[lang]}</span>
-        </label>
+        <div>
+          <label className="flex min-h-11 cursor-pointer items-start gap-3 pt-1">
+            <input
+              {...a11y('consent')}
+              type="checkbox"
+              checked={form.consent}
+              onChange={e => change('consent', { consent: e.target.checked })}
+              className="mt-0.5 h-5 w-5 shrink-0 cursor-pointer"
+              style={{ accentColor: '#8b4513' }}
+            />
+            <span className="text-[15px] leading-[1.5] text-text-primary">{c.consent[lang]}</span>
+          </label>
+          {errorText('consent')}
+        </div>
       </div>
-
-      {error && <p className="mt-5 text-[14px]" style={{ color: '#a84513' }} role="alert">{error}</p>}
 
       <button type="submit" className={`${PRIMARY_BTN} mt-8`}>{c.submit[lang]}</button>
     </form>
@@ -315,6 +353,7 @@ export default function Diagnostic() {
           : ''
 
   return (
+    <MotionConfig reducedMotion="user">
     <AnimatePresence>
       {isOpen && (
         <>
@@ -357,7 +396,7 @@ export default function Diagnostic() {
                       <button
                         type="button"
                         onClick={back}
-                        className="cursor-pointer rounded-lg px-3 py-2 text-[14px] font-medium transition-colors hover:bg-[rgba(28,18,9,0.05)]"
+                        className="inline-flex min-h-11 cursor-pointer items-center rounded-lg px-3 text-[14px] font-medium transition-colors hover:bg-[rgba(28,18,9,0.05)]"
                         style={{ color: '#4a3520' }}
                       >
                         ← {ui.back[lang]}
@@ -373,7 +412,7 @@ export default function Diagnostic() {
                       type="button"
                       onClick={close}
                       aria-label={ui.close[lang]}
-                      className="grid h-10 w-10 cursor-pointer place-items-center rounded-lg text-2xl leading-none transition-colors hover:bg-[rgba(28,18,9,0.05)]"
+                      className="grid h-11 w-11 cursor-pointer place-items-center rounded-lg text-2xl leading-none transition-colors hover:bg-[rgba(28,18,9,0.05)]"
                       style={{ color: '#4a3520' }}
                     >
                       ×
@@ -404,5 +443,6 @@ export default function Diagnostic() {
         </>
       )}
     </AnimatePresence>
+    </MotionConfig>
   )
 }

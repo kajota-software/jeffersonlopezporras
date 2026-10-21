@@ -7,7 +7,7 @@
   --color-card:          #e8e0cf;
 
   --color-accent:        #8b4513;
-  --color-accent-bright: #b5642a;
+  --color-accent-bright: #a55a24; /* hover: blanco encima pasa 4.5:1 */
   --color-accent-dim:    #6b3510;
 
   --color-text-primary:  #1c1209;
@@ -48,10 +48,26 @@
   ::-webkit-scrollbar-thumb:hover { background: rgba(28,18,9,0.32); }
 }
 
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Aparición al hacer scroll (Reveal): solo oculta si hay JavaScript para mostrarla */
+[data-reveal] { transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+:root[data-js] [data-reveal]:not([data-shown]) { opacity: 0; transform: translateY(20px); }
+
+.chat-in   { animation: rise-in 0.45s ease-out 0.9s both; }
+.faq-answer { animation: rise-in 0.25s ease-out; }
+
+/* Foco visible en todo lo interactivo al navegar con teclado */
+:focus-visible { outline: 2px solid #8b4513; outline-offset: 2px; border-radius: 4px; }
+
 @media (prefers-reduced-motion: reduce) {
-  [data-reveal] { opacity: 1 !important; transform: none !important; }
+  [data-reveal] { opacity: 1 !important; transform: none !important; transition: none; }
   html { scroll-behavior: auto; }
   .marquee-track { animation: none; }
+  .chat-in, .faq-answer { animation: none; }
 }
 
 @layer utilities {
@@ -60,13 +76,6 @@
   }
   .marquee-track:hover {
     animation-play-state: paused;
-  }
-
-  .gradient-text {
-    background: linear-gradient(135deg, #b5642a 0%, #8b4513 55%, #6b3510 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
   }
 
   /* Puntos de tinta sobre papel */

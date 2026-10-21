@@ -46,11 +46,16 @@ export default function Offer() {
           </div>
         </Reveal>
 
-        <Reveal className="mt-16 md:mt-20">
-          <p className={LABEL} style={{ color: '#8b4513' }}>{o.guaranteeLabel[lang]}</p>
-          <p className="mt-4 font-medium leading-[1.5] tracking-tight text-text-primary" style={{ fontSize: 'clamp(1.2rem, 2.4vw, 1.6rem)' }}>
-            {o.guaranteeText[lang]}
-          </p>
+        <Reveal className="mt-16 flex flex-col gap-10 md:mt-20">
+          {o.guarantees.map(g => (
+            <div key={g.label.es}>
+              <p className={LABEL} style={{ color: '#8b4513' }}>{g.label[lang]}</p>
+              <p className="mt-3 font-medium leading-[1.5] tracking-tight text-text-primary" style={{ fontSize: 'clamp(1.2rem, 2.4vw, 1.6rem)' }}>
+                {g.text[lang]}
+              </p>
+            </div>
+          ))}
+          <p className="text-[1.05rem] leading-[1.7]" style={{ color: '#4a3520' }}>{o.ownership[lang]}</p>
         </Reveal>
       </div>
     </section>
