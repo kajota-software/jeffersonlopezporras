@@ -393,7 +393,7 @@ export const t = {
   },
 
   footer: {
-    left:      { es: 'Jefferson López · 2026', en: 'Jefferson López · 2026' },
+    year:      { es: '© 2026', en: '© 2026' },
     fitmanage: { es: 'FitManage.app', en: 'FitManage.app' },
     cr:        { es: 'Hecho en Costa Rica 🇨🇷', en: 'Made in Costa Rica 🇨🇷' },
   },

@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useLanguage } from '@/context/LanguageContext'
 import { t } from '@/lib/translations'
 
@@ -11,8 +12,9 @@ export default function Footer({ onBlog = false }: { onBlog?: boolean }) {
   return (
     <footer style={{ borderTop: '1px solid rgba(28,18,9,0.09)' }}>
       <div className="mx-auto flex max-w-[1100px] flex-wrap items-center justify-between gap-4 px-6 py-7">
-        <span className="text-sm" style={{ color: '#7a6045' }}>
-          {t.footer.left[lang]}
+        <span className="flex items-center gap-3 text-sm" style={{ color: '#7a6045' }}>
+          <Image src="/brand/logo-jefferson-lopez.svg" alt="Jefferson López" width={737} height={163} className="h-5 w-auto" />
+          {t.footer.year[lang]}
         </span>
 
         <div className="flex flex-wrap items-center gap-6">

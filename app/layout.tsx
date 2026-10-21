@@ -88,6 +88,7 @@ const jsonLd = {
       description:
         'Construyo webs y sistemas digitales para negocios de servicio en Costa Rica y LATAM. Co-fundador de FitManage.app — software para entrenadores personales con +10,000 usuarios.',
       url: BASE_URL,
+      image: `${BASE_URL}/brand/icono-jl-512.png`,
       email: 'jefferson.lopez.porras21@gmail.com',
       sameAs: [
         'https://www.linkedin.com/in/jeff-lp',

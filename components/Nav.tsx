@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import type { Transition } from 'framer-motion'
 import { useLanguage } from '@/context/LanguageContext'
@@ -43,8 +44,8 @@ export default function Nav({ onBlog = false }: { onBlog?: boolean }) {
       }}
     >
       <div className="mx-auto flex max-w-[1100px] items-center justify-between px-6 py-4">
-        <Link href={onBlog ? '/' : '#home'} className="whitespace-nowrap text-[1.05rem] font-semibold tracking-tight" style={{ color: '#1c1209' }}>
-          Jefferson López
+        <Link href={onBlog ? '/' : '#home'} aria-label="Jefferson López — inicio" className="shrink-0">
+          <Image src="/brand/logo-jefferson-lopez.svg" alt="Jefferson López" width={737} height={163} priority className="h-[22px] w-auto sm:h-6" />
         </Link>
 
         <nav className="flex items-center gap-3">
