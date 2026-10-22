@@ -11,6 +11,7 @@ import {
 } from '@/lib/diagnostic'
 import { buildWhatsAppUrl } from '@/lib/whatsapp'
 import { track, trackWhatsAppClick } from '@/lib/analytics'
+import { saveDiagnosticLead } from '@/lib/admin/actions/public/diagnostic'
 import OptionList from './OptionList'
 
 const COUNTRY_CODES = [
@@ -221,6 +222,15 @@ function ContactScreen() {
       price: plan.price[lang],
     })
 
+    // Guarda el lead en segundo plano: no se espera y si falla no afecta el flujo
+    const honeypot = (e.currentTarget as HTMLFormElement).elements.namedItem('website') as HTMLInputElement | null
+    saveDiagnosticLead({
+      answers,
+      lang,
+      contact: { name: form.name, business: form.business, countryCode: form.countryCode, phone: form.phone, email: form.email },
+      website: honeypot?.value ?? '',
+    }).catch(() => {})
+
     trackWhatsAppClick('diagnostic', { plan: planKey })
     window.open(buildWhatsAppUrl(message), '_blank', 'noopener,noreferrer')
   }
@@ -309,6 +319,12 @@ function ContactScreen() {
           </label>
           {errorText('consent')}
         </div>
+      </div>
+
+      {/* Campo trampa para bots: oculto para personas y lectores de pantalla */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+        <label htmlFor="contact-website">Website</label>
+        <input id="contact-website" name="website" type="text" tabIndex={-1} autoComplete="off" defaultValue="" />
       </div>
 
       <button type="submit" className={`${PRIMARY_BTN} mt-8`}>{c.submit[lang]}</button>

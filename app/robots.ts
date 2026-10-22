@@ -7,6 +7,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
+      // Área privada y endpoints de auth
+      disallow: ['/admin', '/login', '/api/'],
     },
     sitemap: `${SITE_URL}/sitemap.xml`,
   }

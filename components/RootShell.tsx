@@ -9,7 +9,7 @@ import Analytics from '@/components/Analytics'
 // <html> y <body> compartidos por los dos layouts raíz: (es) y (en)
 export default function RootShell({ lang, children }: { lang: Lang; children: ReactNode }) {
   return (
-    <html lang={lang === 'es' ? 'es-CR' : 'en'} className={inter.variable} suppressHydrationWarning>
+    <html lang={lang === 'es' ? 'es-CR' : 'en'} className={inter.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
       {/* Es el <head> del layout raíz (App Router); la regla de lint aplica a pages/ */}
       {/* eslint-disable-next-line @next/next/no-head-element */}
       <head>

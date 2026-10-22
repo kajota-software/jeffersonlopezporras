@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function GlobalNotFound() {
   return (
-    <html lang="es-CR" className={inter.variable}>
+    <html lang="es-CR" className={inter.variable} data-scroll-behavior="smooth">
       <body>
         <main className="mx-auto flex min-h-screen max-w-[640px] flex-col justify-center px-6">
           <h1 className="text-3xl font-bold tracking-tight text-text-primary">Esta página no existe.</h1>
